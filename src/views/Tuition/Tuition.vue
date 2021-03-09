@@ -5,6 +5,9 @@
     </div>
     <div class="card-body">
       <div>
+        <button class="btn btn-primary mb-3">Tambah Data</button>
+      </div>
+      <div>
         <vue-good-table
           :columns="columns"
           :rows="tuitions"
@@ -16,7 +19,26 @@
             enabled: true,
             mode: 'pages',
             perPage: 5
-          }"/>
+          }"> 
+            <!-- Custom Rows -->
+            <template slot="table-row" slot-scope="props">
+              <!-- Table Action -->
+              <span v-if="props.column.field == 'action'">
+                <button
+                  class="btn btn-success btn-sm btn-block"
+                >
+                  <i class=""></i>
+                  Ubah
+                </button>
+                <button
+                  class="btn btn-danger btn-sm btn-block"
+                >
+                  <i class=""></i>
+                  Hapus
+                </button>
+              </span>
+            </template>
+          </vue-good-table>
       </div>
     </div>
   </div>
@@ -33,14 +55,22 @@ export default {
         {
           label: 'No',
           field: 'id_spp',
+          thClass: 'bg-primary',
         },
         {
           label: 'Tahun',
           field: 'tahun',
+          thClass: 'bg-primary',
         },
         {
           label: 'Nominal',
           field: 'nominal',
+          thClass: 'bg-primary',
+        },
+        {
+          label: 'Action',
+          field: 'action',
+          thClass: 'bg-primary',
         },
       ],
     };
