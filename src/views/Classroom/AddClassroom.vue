@@ -1,44 +1,56 @@
 <template>
-  <b-modal id="modal-add-major" scrollable hide-footer>
+  <b-modal id="modal-add-classroom" scrollable hide-footer>
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Nama Jurusan -->
+          <!-- Nama Kelas -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Nama Jurusan :
+                  Nama Kelas :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="nama_jurusan" rules="required|min:2">
+                <ValidationProvider v-slot="{ errors }" name="nama_kelas" rules="required|min:2">
                   <b-form-input
-                    id="input-nama-jurusan"
-                    v-model="nama_jurusan"
+                    id="input-nama-kelas"
+                    v-model="nama_kelas"
                     type="text"
                     required
-                    placeholder="Enter Nama Jurusan"
+                    placeholder="Enter Nama Kelas"
                   ></b-form-input>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
           </b-row>
-          <!-- Deskripsi -->
+          <!-- Jurusan -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Deskripsi :
+                  Jurusan :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="deskripsi" rules="required">
-                  <b-form-input
-                    id="input-deskripsi"
-                    v-model="deskripsi"
+                <ValidationProvider v-slot="{ errors }" name="jurusan" rules="required">
+                  <!-- <b-form-input
+                    id="input-jurusan"
+                    v-model="id_jurusan"
                     type="text"
                     required
-                    placeholder="Enter deskripsi"
-                  ></b-form-input>
+                    placeholder="Enter jurusan"
+                  ></b-form-input> -->
+                  <b-form-select
+                    id="input-3"
+                    v-model="id_jurusan"
+                    :options="majors"
+                    value-field="id"
+                    text-field="nama_jurusan"
+                    required
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -54,34 +66,36 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   data() {
     return {
-      nama_jurusan: null,
-      deskripsi: null,
+      nama_kelas: null,
+      id_jurusan: null,
     }
   },
   computed: {
-    // ...mapState('student', ['dataUpdate'])
+    ...mapState('classroom', ['classrooms']),
+    ...mapState('major', ['majors']),
   },
   methods: {
+    ...mapActions('major', ['getMajors']),
     resetForm() {
-      this.nama_jurusan = ''
-      this.deskripsi = ''
+      this.nama_kelas = ''
+      this.id_jurusan = ''
     },
     onSubmit() {
       const dataSend = {
-        nama_jurusan: this.nama_jurusan,
-        deskripsi: this.deskripsi,
+        nama_kelas: this.nama_kelas,
+        id_jurusan: this.id_jurusan,
       };
       this.$store
-        .dispatch('major/addMajor', dataSend)
+        .dispatch('classroom/addClassroom', dataSend)
         .then((resp) => {
           if (resp.status === 200) {
-            this.$bvModal.hide('modal-add-major');
-            this.$store.dispatch('major/getMajors');
+            this.$bvModal.hide('modal-add-classroom');
+            this.$store.dispatch('classroom/getClassrooms');
             // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
             this.resetForm()
           } else {
@@ -94,6 +108,9 @@ export default {
           // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
         });
     },
+  },
+  mounted(){
+    this.getMajors()
   }
 }
 </script>

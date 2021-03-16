@@ -177,6 +177,17 @@ export default {
     // ...mapState()
   },
   methods: {
+    resetForm() {
+      this.tahun = ''
+      this.nominal = ''
+      this.id = ''
+      this.nis = ''
+      this.nama = ''
+      this.id_kelas = ''
+      this.alamat = ''
+      this.no_telp = ''
+      this.id_spp = ''
+    },
     onSubmit() {
       const dataSend = {
         id: this.id,
@@ -194,6 +205,7 @@ export default {
             this.$bvModal.hide('modal-add-student');
             this.$store.dispatch('student/getStudents');
             // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
+            this.resetForm();
           } else {
             console.log('Add error')
             // this.$swal(`${resp.code}`, `${resp.error}`, 'error');

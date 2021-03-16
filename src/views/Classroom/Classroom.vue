@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <div>
-        <button class="btn btn-primary mb-3">Tambah Data</button>
+        <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
       </div>
       <div>
         <vue-good-table
@@ -31,12 +31,14 @@
               <span v-if="props.column.field == 'action'">
                 <button
                   class="btn btn-success btn-sm btn-block"
+                  @click="openModalUpdate(props.row)"
                 >
                   <i class=""></i>
                   Ubah
                 </button>
                 <button
                   class="btn btn-danger btn-sm btn-block"
+                  @click="deleteClassroom(props.row)"
                 >
                   <i class=""></i>
                   Hapus
@@ -46,20 +48,28 @@
           </vue-good-table>
       </div>
     </div>
+    <EditClassroom/>
+    <AddClassroom/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import EditClassroom from './EditClassroom'
+import AddClassroom from './AddClassroom'
 
 export default {
   name: 'Classroom',
+  components: {
+    EditClassroom,
+    AddClassroom
+  },
   data(){
     return {
       columns: [
         {
           label: 'No',
-          field: 'id_kelas',
+          field: 'id',
           thClass: 'bg-primary',
         },
         {
@@ -69,7 +79,7 @@ export default {
         },
         {
           label: 'Jurusan',
-          field: 'id_jurusan',
+          field: 'nama_jurusan',
           thClass: 'bg-primary',
         },
         {
@@ -84,7 +94,31 @@ export default {
     ...mapState('classroom', ['classrooms'])
   },
   methods: {
-    ...mapActions('classroom', ['getClassrooms'])
+    ...mapActions('classroom', ['getClassrooms']),
+    openModalAdd() {
+      this.$bvModal.show('modal-add-classroom')
+    },
+    openModalUpdate(payload) {
+      console.log("modal classroom")
+      this.$store.commit('classroom/SET_DATA_UPDATE', payload)
+      this.$bvModal.show('modal-edit-classroom')
+    },
+    deleteClassroom(payload) {
+      this.$store.dispatch('classroom/deleteClassroom', payload)
+      .then((resp) => {
+        if (resp.status === 200) {
+          this.$store.dispatch('classroom/getClassrooms');
+          // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
+        } else {
+          console.log('Add error')
+          // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+      });
+    }
   },
   mounted() {
     this.getClassrooms()

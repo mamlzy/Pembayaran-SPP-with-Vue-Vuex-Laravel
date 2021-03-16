@@ -1,43 +1,43 @@
 <template>
-  <b-modal id="modal-add-major" scrollable hide-footer>
+  <b-modal id="modal-edit-tuition" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Nama Jurusan -->
+          <!-- Tahun -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Nama Jurusan :
+                  Tahun :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="nama_jurusan" rules="required|min:2">
+                <ValidationProvider v-slot="{ errors }" name="tahun" rules="required|min:4">
                   <b-form-input
-                    id="input-nama-jurusan"
-                    v-model="nama_jurusan"
+                    id="input-tahun"
+                    v-model="tahun"
                     type="text"
                     required
-                    placeholder="Enter Nama Jurusan"
+                    placeholder="Enter Tahun"
                   ></b-form-input>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
           </b-row>
-          <!-- Deskripsi -->
+          <!-- Nominal -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Deskripsi :
+                  Nominal :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="deskripsi" rules="required">
+                <ValidationProvider v-slot="{ errors }" name="nominal" rules="required">
                   <b-form-input
-                    id="input-deskripsi"
-                    v-model="deskripsi"
+                    id="input-nominal"
+                    v-model="nominal"
                     type="text"
                     required
-                    placeholder="Enter deskripsi"
+                    placeholder="Enter Nominal"
                   ></b-form-input>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -59,34 +59,34 @@ import {mapState} from 'vuex'
 export default {
   data() {
     return {
-      nama_jurusan: null,
-      deskripsi: null,
+      tahun: null,
+      nominal: null,
     }
   },
   computed: {
-    // ...mapState('student', ['dataUpdate'])
+    ...mapState('tuition', ['dataUpdate'])
   },
   methods: {
-    resetForm() {
-      this.nama_jurusan = ''
-      this.deskripsi = ''
-    },
     onSubmit() {
       const dataSend = {
-        nama_jurusan: this.nama_jurusan,
-        deskripsi: this.deskripsi,
+        tahun: this.tahun,
+        nominal: this.nominal,
       };
       this.$store
-        .dispatch('major/addMajor', dataSend)
+        .dispatch('tuition/updateTuition', {
+          id: this.dataUpdate.id,
+          data: dataSend,
+        })
         .then((resp) => {
+          console.log(resp)
           if (resp.status === 200) {
-            this.$bvModal.hide('modal-add-major');
-            this.$store.dispatch('major/getMajors');
-            // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
-            this.resetForm()
+            this.$bvModal.hide('modal-edit-tuition');
+            this.$store.dispatch('tuition/getTuitions');
+            // this.$swal('Updated !!', 'Tuitions has been updated ', 'success');
+            console.log('Update Success')
           } else {
-            console.log('Add error')
             // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            console.log('update error')
           }
         })
         .catch((err) => {
@@ -94,6 +94,11 @@ export default {
           // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
         });
     },
+
+    setData() {
+      this.tahun = this.dataUpdate.tahun;
+      this.nominal = this.dataUpdate.nominal;
+    }
   }
 }
 </script>

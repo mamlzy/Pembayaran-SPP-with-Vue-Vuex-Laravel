@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <div>
-        <button class="btn btn-primary mb-3">Tambah Data</button>
+        <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
       </div>
       <div>
         <vue-good-table
@@ -30,13 +30,15 @@
               <!-- Table Action -->
               <span v-if="props.column.field == 'action'">
                 <button
-                  class="btn btn-success btn-sm btn-block"
+                class="btn btn-success btn-sm btn-block"
+                @click="openModalUpdate(props.row)"
                 >
                   <i class=""></i>
                   Ubah
                 </button>
                 <button
                   class="btn btn-danger btn-sm btn-block"
+                  @click="deleteTuition(props.row)"
                 >
                   <i class=""></i>
                   Hapus
@@ -46,14 +48,22 @@
           </vue-good-table>
       </div>
     </div>
+    <EditTuition/>
+    <AddTuition/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import EditTuition from './EditTuition'
+import AddTuition from './AddTuition'
 
 export default {
   name: 'Tuition',
+  components: {
+    EditTuition,
+    AddTuition
+  },
   data(){
     return {
       columns: [
@@ -84,7 +94,31 @@ export default {
     ...mapState('tuition', ['tuitions'])
   },
   methods: {
-    ...mapActions('tuition', ['getTuitions'])
+    ...mapActions('tuition', ['getTuitions']),
+    openModalAdd() {
+      this.$bvModal.show('modal-add-tuition')
+    },
+    openModalUpdate(payload) {
+      console.log("modal tuition")
+      this.$store.commit('tuition/SET_DATA_UPDATE', payload)
+      this.$bvModal.show('modal-edit-tuition')
+    },
+    deleteTuition(payload) {
+      this.$store.dispatch('tuition/deleteTuition', payload)
+      .then((resp) => {
+        if (resp.status === 200) {
+          this.$store.dispatch('tuition/getTuitions');
+          // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
+        } else {
+          console.log('Add error')
+          // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+      });
+    }
   },
   mounted() {
     this.getTuitions()

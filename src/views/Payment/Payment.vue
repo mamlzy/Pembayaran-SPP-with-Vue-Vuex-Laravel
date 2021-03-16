@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <div>
-        <button class="btn btn-primary mb-3">Tambah Data</button>
+        <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
       </div>
       <div>
         <vue-good-table
@@ -31,12 +31,14 @@
               <span v-if="props.column.field == 'action'">
                 <button
                   class="btn btn-success btn-sm btn-block"
+                  @click="openModalUpdate(props.row)"
                 >
                   <i class=""></i>
                   Ubah
                 </button>
                 <button
                   class="btn btn-danger btn-sm btn-block"
+                  @click="deletePayment(props.row)"
                 >
                   <i class=""></i>
                   Hapus
@@ -46,20 +48,28 @@
         </vue-good-table>
       </div>
     </div>
+    <EditPayment/>
+    <AddPayment/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import EditPayment from './EditPayment'
+import AddPayment from './AddPayment'
 
 export default {
   name: 'Payment',
+  components: {
+    EditPayment,
+    AddPayment
+  },
   data(){
     return {
       columns: [
         {
           label: 'No',
-          field: 'id_pembayaran',
+          field: 'id',
           thClass: 'bg-primary',
         },
         {
@@ -89,7 +99,7 @@ export default {
         },
         {
           label: 'Jumlah Bayar',
-          field: 'jumlah__bayar',
+          field: 'jumlah_bayar',
           thClass: 'bg-primary',
         },
         {
@@ -104,7 +114,31 @@ export default {
     ...mapState('payment', ['payments'])
   },
   methods: {
-    ...mapActions('payment', ['getPayments'])
+    ...mapActions('payment', ['getPayments']),
+    openModalAdd() {
+      this.$bvModal.show('modal-add-payment')
+    },
+    openModalUpdate(payload) {
+      console.log("modal payment")
+      this.$store.commit('payment/SET_DATA_UPDATE', payload)
+      this.$bvModal.show('modal-edit-payment')
+    },
+    deletePayment(payload) {
+      this.$store.dispatch('payment/deletePayment', payload)
+      .then((resp) => {
+        if (resp.status === 200) {
+          this.$store.dispatch('payment/getPayments');
+          // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
+        } else {
+          console.log('Add error')
+          // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+      });
+    }
   },
   mounted() {
     this.getPayments()
