@@ -1,3 +1,4 @@
 export default {
-  majors: []
+  majors: [],
+  dataUpdate: [],
 }

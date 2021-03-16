@@ -20,6 +20,11 @@
             mode: 'pages',
             perPage: 5
           }"> 
+              <!-- if Empty -->
+            <div slot="emptystate" class="text-center">
+              Data Tidak Ditemukan
+            </div>
+            
             <!-- Custom Rows -->
             <template slot="table-row" slot-scope="props">
               <!-- Table Action -->

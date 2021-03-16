@@ -1,16 +1,16 @@
 <template>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h4 class="m-0 font-weight-bold text-primary">Jurusan</h4>
+      <h4 class="m-0 font-weight-bold text-primary">Pembayaran</h4>
     </div>
     <div class="card-body">
       <div>
-        <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
+        <button class="btn btn-primary mb-3">Tambah Data</button>
       </div>
       <div>
         <vue-good-table
           :columns="columns"
-          :rows="majors"
+          :rows="payments"
           :search-options="{
             enabled: true,
             placeholder: 'Search this table',
@@ -30,15 +30,13 @@
               <!-- Table Action -->
               <span v-if="props.column.field == 'action'">
                 <button
-                class="btn btn-success btn-sm btn-block"
-                @click="openModalUpdate(props.row)"
+                  class="btn btn-success btn-sm btn-block"
                 >
                   <i class=""></i>
                   Ubah
                 </button>
                 <button
                   class="btn btn-danger btn-sm btn-block"
-                  @click="deleteMajor(props.row)"
                 >
                   <i class=""></i>
                   Hapus
@@ -48,38 +46,50 @@
         </vue-good-table>
       </div>
     </div>
-    <EditMajor/>
-    <AddMajor/>
   </div>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
-import EditMajor from './EditMajor'
-import AddMajor from './AddMajor'
 
 export default {
-  name: 'Major',
-  components: {
-    EditMajor,
-    AddMajor
-  },
+  name: 'Payment',
   data(){
     return {
       columns: [
         {
           label: 'No',
-          field: 'id',
+          field: 'id_pembayaran',
           thClass: 'bg-primary',
         },
         {
-          label: 'Nama Jurusan',
-          field: 'nama_jurusan',
+          label: 'Nama User',
+          field: 'id_user',
           thClass: 'bg-primary',
         },
         {
-          label: 'Deskripsi',
-          field: 'deskripsi',
+          label: 'NISN',
+          field: 'nisn',
+          thClass: 'bg-primary',
+        },
+        {
+          label: 'Tanggal Bayar',
+          field: 'tgl_bayar',
+          thClass: 'bg-primary',
+        },
+        {
+          label: 'Tahun Bayar',
+          field: 'tahun_bayar',
+          thClass: 'bg-primary',
+        },
+        {
+          label: 'SPP',
+          field: 'id_spp',
+          thClass: 'bg-primary',
+        },
+        {
+          label: 'Jumlah Bayar',
+          field: 'jumlah__bayar',
           thClass: 'bg-primary',
         },
         {
@@ -91,37 +101,13 @@ export default {
     };
   },
   computed: {
-    ...mapState('major', ['majors'])
+    ...mapState('payment', ['payments'])
   },
   methods: {
-    ...mapActions('major', ['getMajors']),
-    openModalAdd() {
-      this.$bvModal.show('modal-add-major')
-    },
-    openModalUpdate(payload) {
-      console.log("modal major")
-      this.$store.commit('major/SET_DATA_UPDATE', payload)
-      this.$bvModal.show('modal-edit-major')
-    },
-    deleteMajor(payload) {
-      this.$store.dispatch('major/deleteMajor', payload)
-      .then((resp) => {
-        if (resp.status === 200) {
-          this.$store.dispatch('major/getMajors');
-          // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
-        } else {
-          console.log('Add error')
-          // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
-      });
-    }
+    ...mapActions('payment', ['getPayments'])
   },
   mounted() {
-    this.getMajors()
+    this.getPayments()
   }
 }
 </script>

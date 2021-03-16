@@ -5,3 +5,16 @@ export const getStudents = ({commit}) => {
     commit('SET_STUDENTS', response.data)
   })
 }
+
+export const updateStudent = ({commit}, payload) => {
+  return Student.update(payload)
+}
+
+export const addStudent = ({commit}, payload) => {
+  // console.log(payload, 'Data Store')
+  return Student.store(payload)
+}
+
+export const deleteStudent = ({commit}, payload) => {
+  return Student.delete(payload.id)
+}

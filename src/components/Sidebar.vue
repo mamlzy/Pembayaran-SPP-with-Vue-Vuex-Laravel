@@ -17,7 +17,7 @@
 
           <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-              <router-link to="/dashboard" class="nav-link">
+              <router-link to="/" class="nav-link">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
               </router-link>
@@ -113,7 +113,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-              <router-link to="/" class="nav-link">
+              <router-link to="/payments" class="nav-link">
                 <i class="fas fa-fw fa-donate"></i>
                 <span>Pembayaran</span>
               </router-link>

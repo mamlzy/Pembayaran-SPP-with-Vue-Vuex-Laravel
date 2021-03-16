@@ -5,6 +5,7 @@ import Major from '../views/Major/Major.vue'
 import Student from '../views/Student/Student.vue'
 import Classrooms from '../views/Classroom/Classroom.vue'
 import Tuition from '../views/Tuition/Tuition.vue'
+import Payment from '../views/Payment/Payment.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/tuitions',
     name: 'Tuition',
     component: Tuition
+  },
+  {
+    path: '/payments',
+    name: 'Payment',
+    component: Payment
   },
 ]
 
