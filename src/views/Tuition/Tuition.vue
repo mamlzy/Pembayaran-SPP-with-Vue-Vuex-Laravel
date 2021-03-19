@@ -69,7 +69,7 @@ export default {
       columns: [
         {
           label: 'No',
-          field: 'id_spp',
+          field: 'id',
           thClass: 'bg-primary',
         },
         {

@@ -8,16 +8,21 @@
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Nama Siswa :
+                  Nama Petugas :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="nama_siswa" rules="required|numeric">
-                  <b-form-input
-                    id="input-nama-siswa"
+                <ValidationProvider v-slot="{ errors }" name="nama_petugas" rules="required">
+                  <b-form-select
+                    id="input-nama-petugas"
                     v-model="id_user"
-                    type="number"
+                    :options="users"
+                    value-field="id"
+                    text-field="name"
                     required
-                    placeholder="Enter Nama Siswa"
-                  ></b-form-input>
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -31,14 +36,19 @@
                   <span class="text-danger">*</span>
                   NISN :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="nisn" rules="required|min:11">
-                  <b-form-input
-                    id="input-nisn"
+                <ValidationProvider v-slot="{ errors }" name="nisn" rules="required">
+                  <b-form-select
+                    id="input-3"
                     v-model="nisn"
-                    type="text"
+                    :options="students"
+                    value-field="id"
+                    text-field="id"
                     required
-                    placeholder="Enter NISN"
-                  ></b-form-input>
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -116,13 +126,18 @@
                   SPP :
                 </label>
                 <ValidationProvider v-slot="{ errors }" name="spp" rules="required|numeric">
-                  <b-form-input
-                    id="input-spp"
+                  <b-form-select
+                    id="input-3"
                     v-model="id_spp"
-                    type="text"
+                    :options="tuitions"
+                    value-field="id"
+                    text-field="nominal"
                     required
-                    placeholder="Enter SPP"
-                  ></b-form-input>
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -159,7 +174,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   data() {
@@ -174,9 +189,14 @@ export default {
     }
   },
   computed: {
-    // ...mapState('student', ['dataUpdate'])
+    ...mapState('user', ['users']),
+    ...mapState('student', ['students']),
+    ...mapState('tuition', ['tuitions']),
   },
   methods: {
+    ...mapActions('user', ['getUsers']),
+    ...mapActions('student', ['getStudents']),
+    ...mapActions('tuition', ['getTuitions']),
     resetForm() {
       this.id_user  = ''
       this.nisn = ''
@@ -196,7 +216,7 @@ export default {
         id_spp: this.id_spp,
         jumlah_bayar: this.jumlah_bayar,
       };
-      console.log(dataSend)
+      console.log(dataSend, 'Data Send')
       this.$store
         .dispatch('payment/addPayment', dataSend)
         .then((resp) => {
@@ -215,6 +235,11 @@ export default {
           // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
         });
     },
+  },
+  mounted() {
+    this.getUsers()
+    this.getStudents()
+    this.getTuitions()
   }
 }
 </script>

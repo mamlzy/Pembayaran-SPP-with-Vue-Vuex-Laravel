@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import user from './modules/user'
 import major from './modules/major'
 import student from './modules/student'
 import classroom from './modules/classroom'
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    user,
     major,
     student,
     classroom,

@@ -74,13 +74,18 @@
                   Kelas :
                 </label>
                   <ValidationProvider v-slot="{ errors }" name="id_kelas" rules="numeric|required">
-                    <b-form-input
-                      id="input-kelas"
+                    <b-form-select
+                      id="input-3"
                       v-model="id_kelas"
-                      type="number"
+                      :options="classrooms"
+                      value-field="id"
+                      text-field="nama_kelas"
                       required
-                      placeholder="Enter kelas"
-                    ></b-form-input>
+                    >
+                      <template #first>
+                        <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                      </template>
+                    </b-form-select>
                     <span>{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
@@ -137,13 +142,18 @@
                   SPP :
                 </label>
                   <ValidationProvider v-slot="{ errors }" name="id_spp" rules="numeric|required">
-                    <b-form-input
-                      id="input-spp"
+                    <b-form-select
+                      id="input-3"
                       v-model="id_spp"
-                      type="number"
+                      :options="tuitions"
+                      value-field="id"
+                      text-field="nominal"
                       required
-                      placeholder="Enter spp"
-                    ></b-form-input>
+                    >
+                      <template #first>
+                        <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                      </template>
+                    </b-form-select>
                     <span>{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
@@ -159,7 +169,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
   data() {
@@ -174,9 +184,12 @@ export default {
     }
   },
   computed: {
-    // ...mapState()
+    ...mapState('classroom', ['classrooms']),
+    ...mapState('tuition', ['tuitions']),
   },
   methods: {
+    ...mapActions('classroom', ['getClassrooms']),
+    ...mapActions('tuition', ['getTuitions']),
     resetForm() {
       this.tahun = ''
       this.nominal = ''
@@ -216,6 +229,10 @@ export default {
           // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
         });
     },
+  },
+  mounted() {
+    this.getClassrooms()
+    this.getTuitions()
   }
 }
 </script>

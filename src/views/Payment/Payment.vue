@@ -6,6 +6,7 @@
     <div class="card-body">
       <div>
         <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
+        <button class="btn btn-success mb-3 float-right" @click="exportCsv()">Export CSV</button>
       </div>
       <div>
         <vue-good-table
@@ -73,8 +74,8 @@ export default {
           thClass: 'bg-primary',
         },
         {
-          label: 'Nama User',
-          field: 'id_user',
+          label: 'Petugas',
+          field: 'nama_petugas',
           thClass: 'bg-primary',
         },
         {
@@ -94,7 +95,7 @@ export default {
         },
         {
           label: 'SPP',
-          field: 'id_spp',
+          field: 'spp',
           thClass: 'bg-primary',
         },
         {
@@ -138,7 +139,27 @@ export default {
         console.log(err);
         // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
       });
-    }
+    },
+    exportCsv() {
+      let csvContent = 'data:text/csv;charset=utf-8,';
+      let test = 'data:text/csv;charset=utf-8,';
+      test += [
+        Object.keys(this.payments[0]).join(';'),
+        ...this.payments.map((item) => Object.values(item).join(';'))
+      ]
+      console.log(test)
+      csvContent += [
+        Object.keys(this.payments[0]).join(';'),
+        ...this.payments.map((item) => Object.values(item).join(';'))
+      ]
+        .join('\n')
+        .replace(/(^\[)|(\]$)/gm, '');
+      const data = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', data);
+      link.setAttribute('download', 'Payments.csv');
+      link.click();
+    },
   },
   mounted() {
     this.getPayments()

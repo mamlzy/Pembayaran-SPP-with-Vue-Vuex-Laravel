@@ -46,7 +46,6 @@
               </button>
             </span>
           </template>
-
           </vue-good-table>
       </div>
     </div>
@@ -91,7 +90,7 @@ export default {
         },
         {
           label: 'Kelas',
-          field: 'id_kelas',
+          field: 'nama_kelas',
           thClass: 'bg-primary',
           tdClass: 'bg-light',
         },
@@ -109,7 +108,7 @@ export default {
         },
         {
           label: 'SPP',
-          field: 'id_spp',
+          field: 'spp',
           thClass: 'bg-primary',
           tdClass: 'bg-light',
         },

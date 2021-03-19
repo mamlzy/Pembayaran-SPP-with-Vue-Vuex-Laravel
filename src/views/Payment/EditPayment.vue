@@ -11,13 +11,18 @@
                   Nama Siswa :
                 </label>
                 <ValidationProvider v-slot="{ errors }" name="nama_siswa" rules="required">
-                  <b-form-input
-                    id="input-nama-siswa"
+                  <b-form-select
+                    id="input-nama-petugas"
                     v-model="id_user"
-                    type="text"
+                    :options="users"
+                    value-field="id"
+                    text-field="name"
                     required
-                    placeholder="Enter Nama Siswa"
-                  ></b-form-input>
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -32,13 +37,18 @@
                   NISN :
                 </label>
                 <ValidationProvider v-slot="{ errors }" name="nisn" rules="required|min:11">
-                  <b-form-input
-                    id="input-nisn"
+                  <b-form-select
+                    id="input-3"
                     v-model="nisn"
-                    type="text"
+                    :options="students"
+                    value-field="id"
+                    text-field="id"
                     required
-                    placeholder="Enter NISN"
-                  ></b-form-input>
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -116,13 +126,18 @@
                   SPP :
                 </label>
                 <ValidationProvider v-slot="{ errors }" name="spp" rules="required|numeric">
-                  <b-form-input
-                    id="input-spp"
+                  <b-form-select
+                    id="input-3"
                     v-model="id_spp"
-                    type="text"
+                    :options="tuitions"
+                    value-field="id"
+                    text-field="nominal"
                     required
-                    placeholder="Enter SPP"
-                  ></b-form-input>
+                  >
+                    <template #first>
+                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                    </template>
+                  </b-form-select>
                   <span>{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
@@ -159,7 +174,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   data() {
@@ -174,9 +189,15 @@ export default {
     }
   },
   computed: {
-    ...mapState('payment', ['dataUpdate'])
+    ...mapState('payment', ['dataUpdate']),
+    ...mapState('user', ['users']),
+    ...mapState('student', ['students']),
+    ...mapState('tuition', ['tuitions']),
   },
   methods: {
+    ...mapActions('user', ['getUsers']),
+    ...mapActions('student', ['getStudents']),
+    ...mapActions('tuition', ['getTuitions']),
     onSubmit() {
       console.log('submitted')
       const dataSend = {
@@ -220,6 +241,11 @@ export default {
       this.id_spp = this.dataUpdate.id_spp
       this.jumlah_bayar = this.dataUpdate.jumlah_bayar
     }
+  },
+  mounted() {
+    this.getUsers()
+    this.getStudents()
+    this.getTuitions()
   }
 }
 </script>
