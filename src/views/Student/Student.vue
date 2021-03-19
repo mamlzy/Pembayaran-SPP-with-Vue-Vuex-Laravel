@@ -1,58 +1,71 @@
 <template>
-<div>
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h4 class="m-0 font-weight-bold text-primary">Siswa</h4>
+  <div>
+    <div class="page-header">
+      <h3 class="page-title"> Siswa </h3>
+      <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Typography</li>
+        </ol>
+      </nav> -->
     </div>
-    <div class="card-body">
-      <div>
-        <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
+    <div class="card">
+      <div class="card-header ">
+        <button type="button" class="btn btn-social-icon-text btn-facebook" @click="openModalAdd()">
+          <i class="mdi mdi-plus-box"></i>
+          Tambah Data
+        </button>
       </div>
-      <div>
-        <vue-good-table
-          :columns="columns"
-          :rows="students"
-          :search-options="{
-            enabled: true,
-            placeholder: 'Search this table',
-          }"
-          :pagination-options="{
-            enabled: true,
-            mode: 'pages',
-            perPage: 5
-          }">
-          <!-- if Empty -->
-          <div slot="emptystate" class="text-center">
-            Data Tidak Ditemukan
-          </div>
+      <div class="card-body">
+        <!-- <div>
+          <button class="btn btn-gradient-primary mb-3" @click="openModalAdd()">Tambah Data</button>
+        </div> -->
+        <div>
+          <vue-good-table
+            :columns="columns"
+            :rows="students"
+            styleClass="vgt-table striped"
+            :search-options="{
+              enabled: true,
+              placeholder: 'Search this table',
+            }"
+            :pagination-options="{
+              enabled: true,
+              mode: 'pages',
+              perPage: 5
+            }">
+            <!-- if Empty -->
+            <div slot="emptystate" class="text-center">
+              Data Tidak Ditemukan
+            </div>
 
-          <!-- Custom Rows -->
-          <template slot="table-row" slot-scope="props">
-            <!-- Table Action -->
-            <span v-if="props.column.field == 'action'">
-              <button
-                class="btn btn-success btn-sm btn-block"
-                @click="openModalUpdate(props.row)"
-              >
-                <i class=""></i>
-                Ubah
-              </button>
-              <button
-                class="btn btn-danger btn-sm btn-block"
-                @click="deleteStudent(props.row)"
-              >
-                <i class=""></i>
-                Hapus
-              </button>
-            </span>
-          </template>
-          </vue-good-table>
+            <!-- Custom Rows -->
+            <template slot="table-row" slot-scope="props">
+              <!-- Table Action -->
+              <span v-if="props.column.field == 'action'">
+                <button
+                  class="btn btn-success btn-sm btn-block"
+                  @click="openModalUpdate(props.row)"
+                >
+                  <i class=""></i>
+                  Ubah
+                </button>
+                <button
+                  class="btn btn-danger btn-sm btn-block"
+                  @click="deleteStudent(props.row)"
+                >
+                  <i class=""></i>
+                  Hapus
+                </button>
+              </span>
+            </template>
+            </vue-good-table>
+        </div>
       </div>
     </div>
+    <EditStudent/>
+    <AddStudent/>
   </div>
-  <EditStudent/>
-  <AddStudent/>
-</div>
 </template>
 
 <script>
@@ -158,12 +171,15 @@ export default {
 
 <style>
   .bg-primary {
-    background: #0879FA !important;
-    color: #fff !important;
+    background: #b66dff !important;
+    color: white !important;
   }
+  /* .bg-light {
+    background: #F7F7F7 !important;
+  } */
 
   .vgt-global-search {
-    background: #0879FA !important;
+    background: #b66dff !important;
   }
   
   .magnifying-glass {
@@ -174,8 +190,8 @@ export default {
     background: white !important;
   }
 
-  .vgt-wrap__footer, .page-info__label, .footer__navigation__page-btn {
-    background: #0879FA !important;
+  .vgt-wrap__footer, .page-info__label, .footer__navigation__page-btn, .footer__row-count__select {
+    background: #b66dff !important;
     color: white !important;
-  }
+  } 
 </style>

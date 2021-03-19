@@ -1,137 +1,61 @@
 <template>
-  
-
-      <!-- Sidebar -->
-      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-          <!-- Sidebar - Brand -->
-          <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-              <div class="sidebar-brand-icon rotate-n-15">
-                  <i class="fas fa-laugh-wink"></i>
-              </div>
-              <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-          </a>
-
-          <!-- Divider -->
-          <hr class="sidebar-divider my-0">
-
-          <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-              </router-link>
+  <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="purple/assets/images/faces/face1.jpg" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">David Grey. H</span>
+                  <span class="text-secondary text-small">Project Manager</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+              </a>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-              Admin
-            </div>
-
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
-              <router-link to="/students" class="nav-link pb-0">
-                <i class="fas fa-fw fa-user-graduate"></i>
-                <span>Siswa</span>
-              </router-link>
+                <router-link to="/" class="nav-link">
+                <span class="menu-title">Dashboard</span>
+                  <i class="mdi mdi-home menu-icon"></i>
+                </router-link>
+              <div class="border-bottom"></div>
             </li>
-
             <li class="nav-item">
-              <router-link to="/classrooms" class="nav-link pb-0">
-                <i class="fas fa-fw fa-house-user"></i>
-                <span>Kelas</span>
-              </router-link>
+              <router-link to="/students" class="nav-link">
+                <span class="menu-title">Siswa</span>
+                  <i class="mdi mdi-account-multiple menu-icon"></i>
+                </router-link>
             </li>
-
             <li class="nav-item">
-              <router-link to="/majors" class="nav-link pb-0">
-                <i class="fas fa-fw fa-user"></i>
-                <span>Jurusan</span>
-              </router-link>
+              <router-link to="/classrooms" class="nav-link">
+                <span class="menu-title">Kelas</span>
+                  <i class="mdi mdi-home menu-icon"></i>
+                </router-link>
             </li>
-
+            <li class="nav-item">
+              <router-link to="/majors" class="nav-link">
+                <span class="menu-title">Jurusan</span>
+                  <i class="mdi mdi-book-open-page-variant menu-icon"></i>
+                </router-link>
+            </li>
             <li class="nav-item">
               <router-link to="/tuitions" class="nav-link">
-                <i class="fas fa-fw fa-money-check-alt"></i>
-                <span>SPP</span>
-              </router-link>
+                <span class="menu-title">Spp</span>
+                  <i class="mdi mdi mdi-account-card-details menu-icon"></i>
+                </router-link>
+              <div class="border-bottom"></div>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                USER
-            </div>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-              <router-link to="/" class="nav-link pb-0">
-                <i class="fas fa-fw fa-home"></i>
-                <span>Beranda</span>
-              </router-link>
-            </li>
-
-            <li class="nav-item">
-              <router-link to="/" class="nav-link pb-0">
-                <i class="fas fa-fw fa-user"></i>
-                <span>Profil Saya</span>
-              </router-link>
-            </li>
-
-            <li class="nav-item">
-              <router-link to="/" class="nav-link pb-0" href="tables.html">
-                <i class="fas fa-fw fa-user-edit"></i>
-                <span>Ubah Profil</span>
-              </router-link>
-            </li>
-
-            <li class="nav-item">
-              <router-link to="/" class="nav-link pb-0">
-                <i class="fas fa-fw fa-history"></i>
-                <span>History Pembayaran</span>
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">
-                <i class="fas fa-fw fa-key"></i>
-                <span>Ubah Password</span>
-              </router-link>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                PETUGAS
-            </div>
-
-            <!-- Nav Item - Charts -->
             <li class="nav-item">
               <router-link to="/payments" class="nav-link">
-                <i class="fas fa-fw fa-donate"></i>
-                <span>Pembayaran</span>
-              </router-link>
+                <span class="menu-title">Pembayaran</span>
+                  <i class="mdi mdi mdi-cash-usd menu-icon"></i>
+                </router-link>
             </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-          <!-- Sidebar Toggler (Sidebar) -->
-          <div class="text-center d-none d-md-inline">
-              <button class="rounded-circle border-0" id="sidebarToggle"></button>
-          </div>
-
-          
-
-      </ul>
-      <!-- End of Sidebar -->
-  
+            
+          </ul>
+        </nav>
 </template>
 
 <script>
@@ -140,6 +64,6 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  
 </style>

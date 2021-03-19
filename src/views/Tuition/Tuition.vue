@@ -1,55 +1,66 @@
 <template>
-  <div class="card shadow mb-4">
-    <div class="card-header py-3">
-      <h4 class="m-0 font-weight-bold text-primary">SPP</h4>
+  <div>
+    <div class="page-header">
+      <h3 class="page-title">SPP</h3>
+      <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Typography</li>
+        </ol>
+      </nav> -->
     </div>
-    <div class="card-body">
-      <div>
-        <button class="btn btn-primary mb-3" @click="openModalAdd()">Tambah Data</button>
+    <div class="card shadow mb-4">
+      <div class="card-header ">
+        <button type="button" class="btn btn-social-icon-text btn-facebook" @click="openModalAdd()">
+          <i class="mdi mdi-plus-box"></i>
+          Tambah Data
+        </button>
       </div>
-      <div>
-        <vue-good-table
-          :columns="columns"
-          :rows="tuitions"
-          :search-options="{
-            enabled: true,
-            placeholder: 'Search this table',
-          }"
-          :pagination-options="{
-            enabled: true,
-            mode: 'pages',
-            perPage: 5
-          }"> 
-              <!-- if Empty -->
-            <div slot="emptystate" class="text-center">
-              Data Tidak Ditemukan
-            </div>
-            
-            <!-- Custom Rows -->
-            <template slot="table-row" slot-scope="props">
-              <!-- Table Action -->
-              <span v-if="props.column.field == 'action'">
-                <button
-                class="btn btn-success btn-sm btn-block"
-                @click="openModalUpdate(props.row)"
-                >
-                  <i class=""></i>
-                  Ubah
-                </button>
-                <button
-                  class="btn btn-danger btn-sm btn-block"
-                  @click="deleteTuition(props.row)"
-                >
-                  <i class=""></i>
-                  Hapus
-                </button>
-              </span>
-            </template>
-          </vue-good-table>
+      <div class="card-body">
+        <div>
+          <vue-good-table
+            :columns="columns"
+            :rows="tuitions"
+            :search-options="{
+              enabled: true,
+              placeholder: 'Search this table',
+            }"
+            :pagination-options="{
+              enabled: true,
+              mode: 'pages',
+              perPage: 5
+            }"> 
+                <!-- if Empty -->
+              <div slot="emptystate" class="text-center">
+                Data Tidak Ditemukan
+              </div>
+              
+              <!-- Custom Rows -->
+              <template slot="table-row" slot-scope="props">
+                <!-- Table Action -->
+                <span v-if="props.column.field == 'action'">
+                  <button
+                  class="btn btn-success btn-sm btn-block"
+                  @click="openModalUpdate(props.row)"
+                  >
+                    <i class=""></i>
+                    Ubah
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm btn-block"
+                    @click="deleteTuition(props.row)"
+                  >
+                    <i class=""></i>
+                    Hapus
+                  </button>
+                </span>
+              </template>
+            </vue-good-table>
+        </div>
       </div>
     </div>
-    <EditTuition/>
-    <AddTuition/>
+      <EditTuition/>
+      <AddTuition/>
   </div>
 </template>
 

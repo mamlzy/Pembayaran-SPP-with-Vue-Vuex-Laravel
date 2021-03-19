@@ -6,37 +6,38 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <!-- Custom fonts for this template-->
-    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="purple/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="purple/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End Plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="purple/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="purple/assets/images/favicon.ico" />
+  </head>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <!-- plugins:js -->
+    <script src="purple/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="purple/assets/vendors/chart.js/Chart.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="purple/assets/js/off-canvas.js"></script>
+    <!-- <script src="purple/assets/js/hoverable-collapse.js"></script> -->
+    <script src="purple/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="purple/assets/js/dashboard.js"></script>
+    <script src="purple/assets/js/todolist.js"></script>
+    <!-- End custom js for this page -->
   </body>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="assets/js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <!-- <script src="assets/vendor/chart.js/Chart.min.js"></script> -->
-
-  <!-- Page level custom scripts -->
-  <!-- <script src="assets/js/demo/chart-area-demo.js"></script>
-  <script src="assets/js/demo/chart-pie-demo.js"></script> -->
 </html>
