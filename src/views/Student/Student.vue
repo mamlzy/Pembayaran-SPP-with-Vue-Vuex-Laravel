@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-header">
-      <h3 class="page-title"> Siswa </h3>
+      <h3 class="page-title">Student</h3>
       <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
@@ -11,9 +11,9 @@
     </div>
     <div class="card">
       <div class="card-header ">
-        <button type="button" class="btn btn-social-icon-text btn-facebook" @click="openModalAdd()">
+        <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()">
+          Add Data
           <i class="mdi mdi-plus-box"></i>
-          Tambah Data
         </button>
       </div>
       <div class="card-body">
@@ -48,14 +48,14 @@
                   @click="openModalUpdate(props.row)"
                 >
                   <i class=""></i>
-                  Ubah
+                  Edit
                 </button>
                 <button
                   class="btn btn-danger btn-sm btn-block"
                   @click="deleteStudent(props.row)"
                 >
                   <i class=""></i>
-                  Hapus
+                  Delete
                 </button>
               </span>
             </template>
@@ -171,7 +171,7 @@ export default {
 
 <style>
   .bg-primary {
-    background: #b66dff !important;
+    background: #ca95ff !important;
     color: white !important;
   }
   /* .bg-light {
@@ -179,7 +179,7 @@ export default {
   } */
 
   .vgt-global-search {
-    background: #b66dff !important;
+    background: #ca95ff !important;
   }
   
   .magnifying-glass {
@@ -191,7 +191,7 @@ export default {
   }
 
   .vgt-wrap__footer, .page-info__label, .footer__navigation__page-btn, .footer__row-count__select {
-    background: #b66dff !important;
+    background: #ca95ff !important;
     color: white !important;
   } 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal-edit-major" scrollable hide-footer @show="setData()">
+  <b-modal id="modal-edit-major" title="Major" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Nama Jurusan -->
@@ -18,7 +18,7 @@
                     required
                     placeholder="Enter Nama Jurusan"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -39,7 +39,7 @@
                     required
                     placeholder="Enter deskripsi"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>

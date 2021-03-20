@@ -24,7 +24,7 @@
             </form>
           </div>
           <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-profile dropdown">
+            <!-- <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
                   <img src="purple/assets/images/faces/face1.jpg" alt="image">
@@ -41,9 +41,9 @@
                 <a class="dropdown-item" href="#">
                   <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item d-none d-lg-block full-screen-link">
-              <a class="nav-link">
+              <a class="btn nav-link">
                 <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
               </a>
             </li>
@@ -136,7 +136,7 @@
               </div>
             </li>
             <li class="nav-item nav-logout d-none d-lg-block">
-              <a class="nav-link" href="#">
+              <a class="btn nav-link" @click.prevent="logout()">
                 <i class="mdi mdi-power"></i>
               </a>
             </li>
@@ -154,8 +154,17 @@
 </template>
 
 <script>
-export default {
+import User from '../api/User'
 
+export default {
+  methods: {
+    logout() {
+      User.logout().then(() => {
+        localStorage.removeItem('auth')
+        this.$router.push({ name: 'Login' })
+      })
+    }
+  }
 }
 </script>
 

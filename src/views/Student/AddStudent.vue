@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal-add-student" scrollable hide-footer>
+  <b-modal id="modal-add-student" title="Student" scrollable hide-footer>
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- NISN -->
@@ -18,7 +18,7 @@
                       required
                       placeholder="Enter nisn"
                     ></b-form-input>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -39,7 +39,7 @@
                       required
                       placeholder="Enter nis"
                     ></b-form-input>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -60,7 +60,7 @@
                       required
                       placeholder="Enter nama"
                     ></b-form-input>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                     </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -86,7 +86,7 @@
                         <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                       </template>
                     </b-form-select>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -107,7 +107,7 @@
                       required
                       placeholder="Enter alamat"
                     ></b-form-input>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -128,7 +128,7 @@
                       required
                       placeholder="Enter nomor telepon"
                     ></b-form-input>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -154,7 +154,7 @@
                         <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                       </template>
                     </b-form-select>
-                    <span>{{ errors[0] }}</span>
+                    <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
               </b-form-group>
             </b-col>

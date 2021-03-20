@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal-edit-tuition" scrollable hide-footer @show="setData()">
+  <b-modal id="modal-edit-tuition" title="Tuition" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Tahun -->
@@ -18,7 +18,7 @@
                     required
                     placeholder="Enter Tahun"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -39,7 +39,7 @@
                     required
                     placeholder="Enter Nominal"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>

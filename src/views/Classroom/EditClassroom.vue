@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal-edit-classroom" scrollable hide-footer @show="setData()">
+  <b-modal id="modal-edit-classroom" title="Class" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Nama Kelas -->
@@ -18,7 +18,7 @@
                     required
                     placeholder="Enter Nama kelas"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -51,7 +51,7 @@
                       <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                     </template>
                   </b-form-select>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>

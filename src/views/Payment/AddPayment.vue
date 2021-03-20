@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal-add-payment" scrollable hide-footer>
+  <b-modal id="modal-add-payment" title="Payment" scrollable hide-footer>
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Nama Siswa -->
@@ -23,7 +23,7 @@
                       <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                     </template>
                   </b-form-select>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -49,7 +49,7 @@
                       <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                     </template>
                   </b-form-select>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -70,7 +70,7 @@
                     required
                     placeholder="Enter Tanggal Bayar"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -91,7 +91,7 @@
                     required
                     placeholder="Enter Bulan Bayar"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -112,7 +112,7 @@
                     required
                     placeholder="Enter Tahun Bayar"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -138,7 +138,7 @@
                       <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
                     </template>
                   </b-form-select>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
@@ -159,7 +159,7 @@
                     required
                     placeholder="Enter Jumlah Bayar"
                   ></b-form-input>
-                  <span>{{ errors[0] }}</span>
+                  <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
