@@ -177,20 +177,32 @@ export default {
       this.$bvModal.show('modal-edit-account')
     },
     deleteAccount(payload) {
-      this.$store.dispatch('user/deleteUser', payload)
-      .then((resp) => {
-        if (resp.status === 200) {
-          this.$store.dispatch('user/getUsers');
-          // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
-        } else {
-          console.log('Add error')
-          // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store.dispatch('user/deleteUser', payload)
+          .then((resp) => {
+            if (resp.status === 200) {
+              this.$store.dispatch('user/getUsers');
+              Swal.fire('Deleted!','Your data has been deleted.','success')
+            } else {
+              console.log('Add error')
+              Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
+          });
         }
       })
-      .catch((err) => {
-        console.log(err);
-        // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
-      });
     }
   },
   mounted() {

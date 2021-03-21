@@ -6,6 +6,9 @@ export default {
   all() {
     return Api.get(END_POINT)
   },
+  count() {
+    return Api.get(`${END_POINT}/count`)
+  },
   store(payload) {
     return Api.post(END_POINT, payload)
   },

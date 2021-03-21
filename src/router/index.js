@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
+
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import Home from '../views/Home.vue'
+import Summary from '../views/Summary/Summary.vue'
 import Account from '../views/Admin/Account.vue'
 import Major from '../views/Major/Major.vue'
 import Student from '../views/Student/Student.vue'
@@ -12,12 +15,20 @@ import Payment from '../views/Payment/Payment.vue'
 
 Vue.use(VueRouter)
 
+// const isAdmin = (to, from, next) => {
+//   // store.dispatch['user/getAuth']
+//   if (store.getters['user/checkRole'] == 'admin') {
+//     return next();
+//   }
+//   return next('/');
+// };
+
 const routes = [
   {
     path: '/login',
     name: 'Login',
     component: Login,
-    meta: { guestOnly: true }
+    meta: { guestOnly: true  }
   },
   {
     path: '/register',
@@ -27,39 +38,44 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Summary',
+    component: Summary,
     meta: { isAuthenticated: true }
   },
   {
     path: '/account',
     name: 'Account',
     component: Account,
-    meta: { isAuthenticated: true }
+    meta: { isAuthenticated: true },
+    // beforeEnter: isAdmin
   },
   {
     path: '/majors',
     name: 'Major',
     component: Major,
-    meta: { isAuthenticated: true }
+    meta: { isAuthenticated: true },
+    // beforeEnter: isAdmin
   },
   {
     path: '/students',
     name: 'Student',
     component: Student,
-    meta: { isAuthenticated: true }
+    meta: { isAuthenticated: true },
+    // beforeEnter: isAdmin
   },
   {
     path: '/classrooms',
     name: 'Classrooms',
     component: Classrooms,
-    meta: { isAuthenticated: true }
+    meta: { isAuthenticated: true },
+    // beforeEnter: isAdmin
   },
   {
     path: '/tuitions',
     name: 'Tuition',
     component: Tuition,
-    meta: { isAuthenticated: true }
+    meta: { isAuthenticated: true },
+    // beforeEnter: isAdmin
   },
   {
     path: '/payments',

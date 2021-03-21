@@ -82,16 +82,16 @@ export default {
           if (resp.status === 200) {
             this.$bvModal.hide('modal-edit-tuition');
             this.$store.dispatch('tuition/getTuitions');
-            // this.$swal('Updated !!', 'Tuitions has been updated ', 'success');
+            Swal.fire('Updated !!', 'Tuition has been updated ', 'success');
             console.log('Update Success')
           } else {
-            // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
             console.log('update error')
           }
         })
         .catch((err) => {
           console.log(err);
-          // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+          Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
         });
     },
 

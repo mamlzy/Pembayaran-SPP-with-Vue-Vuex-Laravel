@@ -133,24 +133,23 @@ export default {
     }
   },
   computed: {
-    ...mapState('classroom', ['classrooms']),
-    ...mapState('major', ['majors']),
+    
   },
   methods: {
-    ...mapActions('major', ['getMajors']),
     resetForm() {
       this.name = ''
       this.email = ''
-      this.role = null
       this.password = ''
       this.password_confirmation = ''
+      this.role = null
     },
     onSubmit() {
       const dataSend = {
         name: this.name,
         email: this.email,
-        role: this.role,
         password: this.password,
+        password_confirmation: this.password_confirmation,
+        role: this.role,
       };
       this.$store
         .dispatch('user/addUser', dataSend)
@@ -158,21 +157,18 @@ export default {
           if (resp.status === 200) {
             this.$bvModal.hide('modal-add-account');
             this.$store.dispatch('user/getUsers');
-            // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
             this.resetForm()
+            Swal.fire(`Success`, `Data has been added!`, 'success');
           } else {
             console.log('Add error')
-            // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
           }
         })
         .catch((err) => {
           console.log(err);
-          // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+          Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
         });
     },
-  },
-  mounted(){
-    this.getMajors()
   }
 }
 </script>

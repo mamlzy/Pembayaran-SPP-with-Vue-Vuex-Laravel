@@ -6,6 +6,12 @@ export const getClassrooms = ({commit}) => {
   })
 }
 
+export const countClassrooms = ({commit}) => {
+  Classroom.count().then(response => {
+    commit('SET_CLASSROOMS_COUNT', response.data)
+  })
+}
+
 export const updateClassroom = ({commit}, payload) => {
   // console.log(payload.data, 'Data Update')
   return Classroom.update(payload)

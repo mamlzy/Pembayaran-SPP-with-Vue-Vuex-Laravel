@@ -23,7 +23,7 @@
             </b-col>
           </b-row>
           <!-- email -->
-          <b-row>
+          <!-- <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
@@ -41,7 +41,7 @@
                 </ValidationProvider>
               </b-form-group>
             </b-col>
-          </b-row>
+          </b-row> -->
           <!-- Role -->
           <b-row>
             <b-col cols="12">
@@ -65,20 +65,38 @@
               </b-form-group>
             </b-col>
           </b-row>
-          <!-- Password -->
+          <!-- Old Password -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Password :
+                  Old Password :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="password" rules="required|min:8">
+                <ValidationProvider v-slot="{ errors }" name="Old Password" rules="min:8">
                   <b-form-input
                     v-model="password"
                     type="password"
-                    required
-                    placeholder="Enter Password"
+                    placeholder="Enter Old Password"
+                  ></b-form-input>
+                  <span class="small text-danger">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <!-- New Password -->
+          <b-row>
+            <b-col cols="12">
+              <b-form-group>
+                <label for="">
+                  <span class="text-danger">*</span>
+                  New Password :
+                </label>
+                <ValidationProvider v-slot="{ errors }" name="New Password" rules="min:8">
+                  <b-form-input
+                    v-model="new_password"
+                    type="password"
+                    placeholder="Enter New Password"
                   ></b-form-input>
                   <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
@@ -93,11 +111,10 @@
                   <span class="text-danger">*</span>
                   Password Confirmation :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="required|min:8">
+                <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="min:8">
                   <b-form-input
-                    v-model="password_confirmation"
+                    v-model="new_password_confirmation"
                     type="password"
-                    required
                     placeholder="Enter Password Confirmation"
                   ></b-form-input>
                   <span class="small text-danger">{{ errors[0] }}</span>
@@ -129,21 +146,29 @@ export default {
       email: null,
       role: null,
       password: null,
-      password_confirmation: null,
+      new_password: null,
+      new_password_confirmation: null,
     }
   },
   computed: {
-    ...mapState('user', ['dataUpdate','users']),
+    ...mapState('user', ['dataUpdate']),
   },
   methods: {
-    ...mapActions('user', ['getusers']),
+    resetForm() {
+      this.password = ''
+      this.new_password = ''
+      this.new_password_confirmation = ''
+    },
     onSubmit() {
       const dataSend = {
         name: this.name,
         email: this.email,
         role: this.role,
         password: this.password,
+        new_password: this.new_password,
+        new_password_confirmation: this.new_password_confirmation,
       };
+      console.log(dataSend)
       this.$store
         .dispatch('user/updateUser', {
           id: this.dataUpdate.id,
@@ -154,29 +179,26 @@ export default {
           if (resp.status === 200) {
             this.$bvModal.hide('modal-edit-account');
             this.$store.dispatch('user/getUsers');
-            // this.$swal('Updated !!', 'Classrooms has been updated ', 'success');
+            this.resetForm()
+            Swal.fire(`Success`, `Data has been updated!`, 'success');
             console.log('Update Success')
           } else {
-            // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
             console.log('update error')
           }
         })
         .catch((err) => {
           console.log(err);
-          // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+          Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
         });
     },
 
     setData() {
       this.name = this.dataUpdate.name;
       this.email = this.dataUpdate.email;
-      this.password = this.dataUpdate.password;
-      this.password_confirmation = this.dataUpdate.password_confirmation;
+      this.role = this.dataUpdate.role;
     }
   },
-  // mounted(){
-  //   this.getUsers()
-  // }
 }
 </script>
 

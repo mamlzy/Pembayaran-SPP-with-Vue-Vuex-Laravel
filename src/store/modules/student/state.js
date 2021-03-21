@@ -1,4 +1,5 @@
 export default {
   students: [],
-  dataUpdate:[]
+  studentsCount: [],
+  dataUpdate:[],
 }

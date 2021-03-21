@@ -29,7 +29,8 @@
                   <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" >SIGN IN</button>
                   <p class="text-danger text-center">{{ failed }}</p>
                 </div>
-                <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.html" class="text-primary">Create</a>
+                <div class="text-center mt-4 font-weight-light"> Don't have an account? 
+                  <router-link to="/register" class="text-primary">Create</router-link>
                 </div>
               </form>
             </ValidationObserver>

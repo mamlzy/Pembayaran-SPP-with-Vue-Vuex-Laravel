@@ -5,6 +5,14 @@ export const getUsers = ({commit}) => {
     commit('SET_USERS', response.data)
   })
 }
+
+export const getAuth = ({commit}) => {
+  // console.log(payload.id)
+  User.auth().then(response => {
+    commit('SET_AUTH_DATA', response.data)
+  })
+}
+
 export const Login = ({commit}, user) => {
   User.login(user).then(response => {
     commit('SET_AUTH_DATA', response.data)
@@ -18,8 +26,8 @@ export const updateUser = ({commit}, payload) => {
 }
 
 export const addUser = ({commit}, payload) => {
-  // console.log(payload, 'Data Store')
-  return User.store(payload)
+  console.log(payload, 'Data Store')
+  return User.register(payload)
 }
 
 export const deleteUser = ({commit}, payload) => {

@@ -188,16 +188,16 @@ export default {
           if (resp.status === 200) {
             this.$bvModal.hide('modal-edit-student');
             this.$store.dispatch('student/getStudents');
-            // this.$swal('Updated !!', 'Students has been updated ', 'success');
+            Swal.fire('Updated !!', 'Student has been updated ', 'success');
             console.log('Update Success')
           } else {
-            // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
             console.log('update error')
           }
         })
         .catch((err) => {
           console.log(err);
-          // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+          Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
         });
     },
 

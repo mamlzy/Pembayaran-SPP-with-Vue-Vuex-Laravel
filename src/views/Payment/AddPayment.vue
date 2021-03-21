@@ -223,16 +223,16 @@ export default {
           if (resp.status === 200) {
             this.$bvModal.hide('modal-add-payment');
             this.$store.dispatch('payment/getPayments');
-            // this.$swal('Updated !!', 'AUDIENCES has been updated ', 'success');
             this.resetForm()
+            Swal.fire(`Success`, `Data has been added!`, 'success');
           } else {
             console.log('Add error')
-            // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
           }
         })
         .catch((err) => {
           console.log(err);
-          // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+          Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
         });
     },
   },

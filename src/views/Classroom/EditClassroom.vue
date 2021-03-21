@@ -32,13 +32,6 @@
                   Jurusan :
                 </label>
                 <ValidationProvider v-slot="{ errors }" name="jurusan" rules="required">
-                  <!-- <b-form-input
-                    id="input-jurusan"
-                    v-model="id_jurusan"
-                    type="text"
-                    required
-                    placeholder="Enter jurusan"
-                  ></b-form-input> -->
                   <b-form-select
                     id="input-3"
                     v-model="id_jurusan"
@@ -96,16 +89,16 @@ export default {
           if (resp.status === 200) {
             this.$bvModal.hide('modal-edit-classroom');
             this.$store.dispatch('classroom/getClassrooms');
-            // this.$swal('Updated !!', 'Classrooms has been updated ', 'success');
+            Swal.fire(`Success`, `Data has been updated!`, 'success');
             console.log('Update Success')
           } else {
-            // this.$swal(`${resp.code}`, `${resp.error}`, 'error');
+            Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
             console.log('update error')
           }
         })
         .catch((err) => {
           console.log(err);
-          // this.$swal(`Gagal`, `Email atau nomor telepon sudah terdaftar`, 'error');
+          Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
         });
     },
 
