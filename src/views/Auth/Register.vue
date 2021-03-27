@@ -9,40 +9,37 @@
             </div>
             <h4>New here?</h4>
             <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-            
-              <div class="form-group">
-                <input type="text" v-model="form.name" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Name">
-                <span class="text-danger" v-if="errors.name">
-                {{ errors.name[0] }}
-                </span>
-              </div>
-              <div class="form-group">
-                <input type="email" v-model="form.email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
-                <span class="text-danger" v-if="errors.email">
-                {{ errors.email[0] }}
-                </span>
-              </div>
-              <div class="form-group">
-                <input type="password" v-model="form.password" class="form-control form-control-lg" placeholder="Password">
-                <span class="text-danger" v-if="errors.password">
-                {{ errors.password[0] }}
-                </span>
-              </div>
-              <div class="form-group">
-                <input type="password" v-model="form.password_confirmation" class="form-control form-control-lg" placeholder="Confirm Password">
-                <span class="text-danger" v-if="errors.confirm_password">
-                {{ errors.confirm_password[0] }}
-                </span>
-              </div>
-              <!-- <div class="mb-4">
-                <div class="form-check">
-                  <label class="form-check-label text-muted">
-                    <input type="checkbox" class="form-check-input"> I agree to all Terms &amp; Conditions <i class="input-helper"></i></label>
+            <ValidationObserver v-slot="{ handleSubmit }">
+              <form class="pt-3" ref="" @submit.prevent="handleSubmit(onSubmit)">
+                <div class="form-group">
+                  <ValidationProvider v-slot="{ errors }" name="Name" rules="required|min:3">
+                    <input type="text" v-model="name" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Name">
+                    <span class="small text-danger">{{ errors[0] }}</span>
+                  </ValidationProvider>
                 </div>
-              </div> -->
-              <div class="mt-3">
-                <button type="submit" @click.prevent="register()" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
-              </div>
+                <div class="form-group">
+                  <ValidationProvider v-slot="{ errors }" name="Email" rules="required|email">
+                    <input type="email" v-model="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                    <span class="small text-danger">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                </div>
+                <div class="form-group">
+                  <ValidationProvider v-slot="{ errors }" name="Password" rules="required">
+                    <input type="password" v-model="password" class="form-control form-control-lg" placeholder="Password">
+                    <span class="small text-danger">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                </div>
+                <div class="form-group">
+                  <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="required">
+                    <input type="password" v-model="password_confirmation" class="form-control form-control-lg" placeholder="Confirm Password">
+                    <span class="small text-danger">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
+                </div>
+              </form>
+            </ValidationObserver>
               <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.html" class="text-primary">Login</a>
               </div>
             
@@ -60,18 +57,23 @@ import User from '../../api/User'
 export default {
   data() {
     return {
-      form:{
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-      },
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
       errors: [],
     }
   },
   methods: {
-    register() {
-      User.register(this.form)
+    onSubmit() {
+      const dataSend = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
+      }
+      this.$store
+      .dispatch('user/register', dataSend)
       .then(() => {
         this.$router.push({ name: 'Login' })
       })

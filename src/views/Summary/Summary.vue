@@ -16,29 +16,29 @@
     </div>
     <div class="row">
       <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-danger card-img-holder text-white">
+        <div class="card bg-gradient-danger card-img-holder text-white shadow">
           <div class="card-body">
             <img src="purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
             <h4 class="font-weight-normal mb-3">Total Students <i class="mdi mdi-chart-line mdi-24px float-right"></i>
             </h4>
-            <h2 class="mb-5">{{ studentsCount }}</h2>
+            <h2 class="mb-5">{{ studentsCount ? studentsCount  : 0 }}</h2>
             <!-- <h6 class="card-text">Increased by 60%</h6> -->
           </div>
         </div>
       </div>
       <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-info card-img-holder text-white">
+        <div class="card bg-gradient-info card-img-holder text-white shadow">
           <div class="card-body">
             <img src="purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
             <h4 class="font-weight-normal mb-3">Total Classess <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
             </h4>
-            <h2 class="mb-5">{{ classroomsCount }}</h2>
+            <h2 class="mb-5">{{ classCount ? classCount : 0 }}</h2>
             <!-- <h6 class="card-text">Decreased by 10%</h6> -->
           </div>
         </div>
       </div>
       <div class="col-md-4 stretch-card grid-margin">
-        <div class="card bg-gradient-success card-img-holder text-white">
+        <div class="card bg-gradient-success card-img-holder text-white shadow">
           <div class="card-body">
             <img src="purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
             <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
@@ -48,12 +48,13 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-6 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <div id="chart">
-            <apexchart type="pie" width="380" :options="chartOptions" :series="series"></apexchart>
+      <div class="col-md-6 grid-margin stretch-card">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="text-center">Total Kelas Per Jurusan</h3>
+            <div id="chart" v-if="classPerMajorCount">
+              <apexchart type="pie" width="380" :options="chartOptions" :series="classPerMajorCount" v-if="classPerMajorCount.length > 0"></apexchart>
+            </div>
           </div>
         </div>
       </div>
@@ -66,13 +67,13 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
   data() {
     return {
-      series: [44, 55, 13, 43, 22],
+      series: [],
       chartOptions: {
         chart: {
           width: 380,
           type: 'pie',
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+        labels: ['RPL', 'TKJ', 'TEI', 'BC', 'MM'],
         responsive: [{
           breakpoint: 480,
           options: {
@@ -88,16 +89,28 @@ export default {
     }
   },
   computed: {
-    ...mapState('student', ['studentsCount']),
-    ...mapState('classroom', ['classroomsCount']),
+    ...mapState('summary', ['studentsCount', 'classCount', 'classPerMajorCount']),
+    
   },
   methods: {
-    ...mapActions('student', ['countStudents']),
-    ...mapActions('classroom', ['countClassrooms'])
+    ...mapActions('summary', ['countStudents','countClassrooms','countClassPerMajor']),
+    ...mapActions('user', ['getLogin']),
+    
   },
   mounted() {
     this.countStudents()
     this.countClassrooms()
+    this.countClassPerMajor()
+    // this.getLogin()
+    // .then(() => {
+    //   Object.values(this.classPerMajorCount).map(i => {
+    //     return this.series.push(Number(i));
+    //   });
+    //     console.log("LEAD CHART SERIE ===>", this.series);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 
 }

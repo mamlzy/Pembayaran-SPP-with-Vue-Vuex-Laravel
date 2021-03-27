@@ -1,65 +1,10 @@
 <template>
-  <!-- <div class="col-md-6 grid-margin stretch-card m-auto">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title text-center">Add New Account</h4>
-        <ValidationObserver v-slot="{ handleSubmit }">
-          <b-form class="forms-sample" ref="" @submit.prevent="handleSubmit(onSubmit)">
-            <div class="form-group">
-              <ValidationProvider v-slot="{ errors }" name="Name" rules="required">
-                <label for="name">Name</label>
-                <input type="text" v-model="name" class="form-control" id="name" placeholder="Name">
-                <span class="small text-danger">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </div>
-            <div class="form-group">
-              <ValidationProvider v-slot="{ errors }" name="Email" rules="required">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                <span class="small text-danger">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </div>
-            <div class="form-group">
-              <ValidationProvider v-slot="{ errors }" name="role" rules="required">
-                <label for="">Role</label>
-                <b-form-select
-                  v-model="role"
-                  :options="options"
-                  required
-                >
-                  <template #first>
-                    <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                  </template>
-                </b-form-select>
-                <span class="small text-danger">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </div>
-            <div class="form-group">
-              <ValidationProvider v-slot="{ errors }" name="password" rules="required">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                <span class="small text-danger">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </div>
-            <div class="form-group">
-              <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="required">
-                <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                <input type="password" v-model="password_confirmation" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
-                <span class="small text-danger">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </div>
-            <div class="float-right">
-              <button class="btn btn-danger mr-2">Reset</button>
-              <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-            </div>
-          </b-form>
-        </ValidationObserver>
-      </div>
-    </div>
-  </div> -->
   <div>
     <div class="page-header">
-      <h3 class="page-title">Accounts</h3>
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+          <i class="mdi mdi-account"></i>
+        </span>Accounts</h3>
       <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
@@ -67,7 +12,7 @@
         </ol>
       </nav> -->
     </div>
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header ">
         <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()">
           Add Data
@@ -90,7 +35,7 @@
             }">
               <!-- if Empty -->
               <div slot="emptystate" class="text-center">
-                Data Tidak Ditemukan
+                Data Not Found
               </div>
               
               <!-- Custom Rows -->

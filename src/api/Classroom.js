@@ -9,6 +9,9 @@ export default {
   count() {
     return Api.get(`${END_POINT}/count`)
   },
+  countClassPerMajor() {
+    return Api.get(`${END_POINT}/classPerMajorCount`)
+  },
   store(payload) {
     return Api.post(END_POINT, payload)
   },

@@ -25,6 +25,8 @@ Vue.component('apexchart', VueApexCharts)
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationObserver', ValidationObserver)
 
+window.queryString = require("query-string");
+
 window.Swal = swal;
 
 Vue.config.productionTip = false

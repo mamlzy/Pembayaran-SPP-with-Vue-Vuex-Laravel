@@ -9,19 +9,35 @@ export const getUsers = ({commit}) => {
 export const getAuth = ({commit}) => {
   // console.log(payload.id)
   User.auth().then(response => {
+    // console.log("GET AUTH MUTATION ==>>",response)
     commit('SET_AUTH_DATA', response.data)
   })
 }
 
-export const Login = ({commit}, user) => {
+export const getLogin = ({commit}) => {
+  // console.log(payload.id)
+  User.loginUser().then(response => {
+    console.log("GET LOGIN MUTATION ==>>",response.data.role)
+    // return response.data.role
+    commit('SET_ROLE', response.data.role)
+  })
+}
+
+export const login = ({commit}, user) => {
   User.login(user).then(response => {
     commit('SET_AUTH_DATA', response.data)
     return response
   })
 }
 
+export const register = ({commit}, user) => {
+  User.register(user).then(response => {
+    return response
+  })
+}
+
 export const updateUser = ({commit}, payload) => {
-  // console.log(payload.data, 'Data Update')
+  console.log('UPDATE USER ACTION ===>', payload)
   return User.update(payload)
 }
 

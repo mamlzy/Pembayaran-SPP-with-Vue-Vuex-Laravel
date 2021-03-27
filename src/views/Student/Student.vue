@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="page-header">
-      <h3 class="page-title">Student</h3>
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+          <i class="mdi mdi-account-multiple"></i>
+        </span>Student</h3>
       <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
@@ -9,7 +12,7 @@
         </ol>
       </nav> -->
     </div>
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header ">
         <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()">
           Add Data
@@ -36,7 +39,7 @@
             }">
             <!-- if Empty -->
             <div slot="emptystate" class="text-center">
-              Data Tidak Ditemukan
+              Data Not Found
             </div>
 
             <!-- Custom Rows -->

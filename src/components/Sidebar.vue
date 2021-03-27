@@ -2,7 +2,7 @@
   <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item nav-profile" v-if="authData">
-        <router-link to="/" class="nav-link">
+        <router-link to="/profile" class="nav-link">
           <div class="nav-profile-image">
             <img src="purple/assets/images/faces/face1.jpg" alt="profile">
             <span class="login-status online"></span>
@@ -16,49 +16,56 @@
         </router-link>
       </li>
       <li class="nav-item">
-          <router-link to="/" class="nav-link">
+          <router-link to="/" active-class="text-primary" class="nav-link">
           <span class="menu-title">Summary</span>
             <i class="mdi mdi-chart-bar menu-icon"></i>
           </router-link>
         <div class="border-bottom"></div>
       </li>
       <li class="nav-item" v-if="authData.role == 'admin'">
-          <router-link to="/Account" class="nav-link">
+          <router-link to="/Account" active-class="text-primary" class="nav-link">
           <span class="menu-title">Account</span>
-            <i class="mdi mdi-account-plus menu-icon"></i>
+            <i class="mdi mdi-account menu-icon"></i>
           </router-link>
         <div class="border-bottom"></div>
       </li>
       <li class="nav-item" v-if="authData.role == 'admin'">
-        <router-link to="/students" class="nav-link">
+        <router-link to="/students" active-class="text-primary" class="nav-link">
           <span class="menu-title">Students</span>
             <i class="mdi mdi-account-multiple menu-icon"></i>
           </router-link>
       </li>
       <li class="nav-item" v-if="authData.role == 'admin'">
-        <router-link to="/classrooms" class="nav-link">
+        <router-link to="/classrooms" active-class="text-primary" class="nav-link">
           <span class="menu-title">Classess</span>
             <i class="mdi mdi-home menu-icon"></i>
           </router-link>
       </li>
       <li class="nav-item" v-if="authData.role == 'admin'">
-        <router-link to="/majors" class="nav-link">
+        <router-link to="/majors" active-class="text-primary" class="nav-link">
           <span class="menu-title">Majors</span>
             <i class="mdi mdi-book-open-page-variant menu-icon"></i>
           </router-link>
       </li>
       <li class="nav-item" v-if="authData.role == 'admin'">
-        <router-link to="/tuitions" class="nav-link">
+        <router-link to="/tuitions" active-class="text-primary" class="nav-link">
           <span class="menu-title">Tuitions</span>
-            <i class="mdi mdi mdi-account-card-details menu-icon"></i>
+            <i class="mdi mdi-account-card-details menu-icon"></i>
           </router-link>
         <div class="border-bottom"></div>
       </li>
       <li class="nav-item">
-        <router-link to="/payments" class="nav-link">
+        <router-link to="/payments" active-class="text-primary" class="nav-link">
           <span class="menu-title">Payment</span>
-            <i class="mdi mdi mdi-cash-usd menu-icon"></i>
+            <i class="mdi mdi-cash-usd menu-icon"></i>
           </router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/history" active-class="text-primary" class="nav-link">
+          <span class="menu-title">Transaction History</span>
+            <i class="mdi mdi-history menu-icon"></i>
+          </router-link>
+          <!-- {{ authData }} -->
       </li>
       
     </ul>
@@ -67,7 +74,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import User from '../api/User'
 
 export default {
   data() {
@@ -79,7 +85,7 @@ export default {
     ...mapState('user', ['authData'])
   },
   methods: {
-    ...mapActions('user', ['getAuth'])
+    ...mapActions('user', ['getAuth']),
   },
   mounted() {
     this.getAuth()

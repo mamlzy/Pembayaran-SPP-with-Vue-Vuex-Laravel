@@ -2,15 +2,15 @@
   <b-modal id="modal-edit-payment" title="payment" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Nama Siswa -->
+          <!-- Nama Petugas -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  Nama Siswa :
+                  Nama Petugas :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="nama_siswa" rules="required">
+                <ValidationProvider v-slot="{ errors }" name="Nama Petugas" rules="required">
                   <b-form-select
                     id="input-nama-petugas"
                     v-model="id_user"

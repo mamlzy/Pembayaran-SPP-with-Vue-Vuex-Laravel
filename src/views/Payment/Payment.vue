@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="page-header">
-      <h3 class="page-title">Payment</h3>
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+          <i class="mdi mdi-cash-usd"></i>
+        </span>Payment</h3>
+      <!-- <h1 >{{ getSuccess }}</h1> -->
       <!-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">UI Elements</a></li>
@@ -9,7 +13,7 @@
         </ol>
       </nav> -->
     </div>
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header ">
         <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()">
           Add Data
@@ -32,13 +36,32 @@
             }">
               <!-- if Empty -->
               <div slot="emptystate" class="text-center">
-                Data Tidak Ditemukan
+                Data Not Found
               </div>
               
               <!-- Custom Rows -->
               <template slot="table-row" slot-scope="props">
+                <span v-if="props.column.field == 'status'">
+                  <span v-if="props.row.status == 1">Belum Dibayar</span> 
+                  <span v-if="props.row.status == 2">Dibayar</span> 
+                </span>
+                <span v-else>
+                  {{props.formattedRow[props.column.field]}}
+                </span>
                 <!-- Table Action -->
                 <span v-if="props.column.field == 'action'">
+                  <button
+                    class="btn btn-sm btn-block"
+                    :class="{
+                      'btn-info': props.row.status == 1,
+                      'btn-secondary text-dark disabled': props.row.status == 2
+                    }"
+                    @click="doPay(props.row)"
+                  >
+                    <i class=""></i>
+                    <span  v-if="props.row.status == 1">Pay</span>
+                    <span  v-if="props.row.status == 2">Paid</span>
+                  </button>
                   <button
                     class="btn btn-success btn-sm btn-block"
                     @click="openModalUpdate(props.row)"
@@ -59,6 +82,11 @@
         </div>
       </div>
     </div>
+    <ValidationObserver v-slot="{ handleSubmit }">
+      <form id="payment-form" @submit.prevent="handleSubmit(onSubmit)">
+        <input type="hidden" name="result_data" id="result_data" value="">
+      </form>
+    </ValidationObserver>
       <EditPayment/>
       <AddPayment/>
   </div>
@@ -114,6 +142,11 @@ export default {
           thClass: 'bg-primary',
         },
         {
+          label: 'Status',
+          field: 'status',
+          thClass: 'bg-primary',
+        },
+        {
           label: 'Action',
           field: 'action',
           thClass: 'bg-primary',
@@ -122,10 +155,67 @@ export default {
     };
   },
   computed: {
-    ...mapState('payment', ['payments'])
+    ...mapState('payment', ['payments']),
+    ...mapState('pay', ['transactionToken','getSuccess']),
+    getToken() {
+      return this.$store.getters['pay/getToken']
+    }
   },
   methods: {
     ...mapActions('payment', ['getPayments']),
+    ...mapActions('pay', ['doPayment','changeStatus']),
+    async doPay(payload) {
+      let that = this
+      // console.log("ssssssssssss", payload)
+      await this.doPayment(payload)
+      // .then(() => {
+        console.log("TOKEN ====> wwww ", this.getToken)
+        function changeResult(type,data) {
+          $("#result-type").val(type)
+          $("#result-data").val(JSON.stringify(data))
+        }
+
+        snap.pay(this.getToken, {
+          onSuccess: async function(result) {
+            console.log('SUCCESS SUBMIT ====>>', result.status_message)
+            // await this.$store.dispatch('pay/getSuccess', result)
+            // .then(() => {
+              changeResult(`success`, result)
+              console.log('SUCCESS SUBMIT ====>>', result.status_message)
+              console.log(result)
+              // $("#payment-form").submit()
+
+            // })
+          },
+          onPending: async function(result) {
+            await that.$store.dispatch('pay/getSuccess', result)
+            .then(() => {
+              changeResult(`pending`, result)
+              that.changeStatus(result)
+              that.getPayments()
+              console.log('SUCCESS SUBMIT PENDING ====>>',result.status_message)
+              console.log('SUCCESS SUBMIT PENDING ====>>',result)
+
+            }).catch((err) => {
+              console.log(err)
+            })
+            
+            // $("#payment-form").submit()
+          },
+          onError: function(result) {
+            changeResult(`error`, result)
+            console.log('SUCCESS SUBMIT ERROR ====>>',result.status_message)
+            console.log('SUCCESS SUBMIT ERROR ====>>',result)
+            $("#payment-form").submit()
+          },
+        })
+
+    // })
+    // .catch((err) => {
+          //   console.log(err)
+          //   Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
+          // })
+    },
     openModalAdd() {
       this.$bvModal.show('modal-add-payment')
     },

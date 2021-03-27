@@ -6,12 +6,6 @@ export const getStudents = ({commit}) => {
   })
 }
 
-export const countStudents = ({commit}) => {
-  Student.count().then(response => {
-    commit('SET_STUDENTS_COUNT', response.data)
-  })
-}
-
 export const updateStudent = ({commit}, payload) => {
   return Student.update(payload)
 }

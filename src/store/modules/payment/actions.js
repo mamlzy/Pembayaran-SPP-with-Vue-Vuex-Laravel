@@ -6,6 +6,19 @@ export const getPayments = ({commit}) => {
   })
 }
 
+export const getPaymentHistory = ({commit}) => {
+  Payment.getPaymentHistory().then(response => {
+    commit('SET_PAYMENT_HISTORY', response.data)
+  })
+}
+
+export const getDetailHistory = ({commit}, payload) => {
+  console.log("DETAIL ACTION ==>", payload)
+  Payment.getDetailHistory(payload).then(response => {
+    commit('SET_DETAIL_HISTORY', response.data)
+  })
+}
+
 export const updatePayment = ({commit}, payload) => {
   // console.log(payload.data, 'Data Update')
   return Payment.update(payload)

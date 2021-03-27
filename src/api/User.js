@@ -36,5 +36,8 @@ export default {
   },
   auth() {
     return Api.get('/user')
+  },
+  loginUser() {
+    return Api.get('/user')
   }
 }

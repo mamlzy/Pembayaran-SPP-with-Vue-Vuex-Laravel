@@ -64,10 +64,10 @@ export default {
         password: this.password,
       }
       // console.log(dataSend)
-      User.login(dataSend)
+      this.$store.dispatch('user/login', dataSend)
       .then(() => {
         localStorage.setItem('auth', 'true')
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'Summary' })
       })
       .catch(err => {
         this.failed = err.response.data.message

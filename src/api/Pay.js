@@ -1,9 +1,17 @@
 import Api from'./Api'
-import axios from 'axios'
 
-const END_POINT = 'payments'
+const END_POINT = 'pay'
 
 export default {
+  pay(payload) {
+    return Api.get(END_POINT, payload)
+  },
+  getToken(payload) {
+    return Api.post('gettoken', payload)
+  },
+  changeStatus(payload) {
+    return Api.post('changestatus', payload)
+  },
   all() {
     return Api.get(END_POINT)
   },
@@ -18,11 +26,5 @@ export default {
   },
   destroy() {
     return Api.delete(END_POINT)
-  },
-  getPaymentHistory(payload) {
-    return Api.post(`${END_POINT}/history`, payload)
-  },
-  getDetailHistory(payload) {
-    return Api.post(`${END_POINT}/detail`, payload)
   }
 }
