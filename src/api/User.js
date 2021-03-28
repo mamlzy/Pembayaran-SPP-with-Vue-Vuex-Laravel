@@ -1,3 +1,4 @@
+import { postImage } from '../store/modules/user/actions'
 import Api from'./Api'
 import Csrf from'./Csrf'
 
@@ -14,13 +15,16 @@ export default {
   
     return Api.post('login', form)
   },
-  async logout(form) {
+  async logout(authData) {
     await Csrf.getCookie()
   
-    return Api.post('logout', form)
+    return Api.post('logout', authData)
   },
   all() {
     return Api.get(END_POINT)
+  },
+  count() {
+    return Api.get(`${END_POINT}/count`)
   },
   store(payload) {
     return Api.post(END_POINT, payload)
@@ -41,5 +45,8 @@ export default {
   },
   loginUser() {
     return Api.get('/user')
+  },
+  postImage(payload) {
+    return Api.post(`${END_POINT}/postimage`, payload)
   }
 }

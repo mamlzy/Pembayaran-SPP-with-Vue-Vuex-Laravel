@@ -16,5 +16,6 @@ export const addStudent = ({commit}, payload) => {
 }
 
 export const deleteStudent = ({commit}, payload) => {
-  return Student.delete(payload.id)
+  console.log("DELETE STUDENT ===>", payload)
+  return Student.delete(payload)
 }

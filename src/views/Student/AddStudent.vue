@@ -191,6 +191,10 @@ export default {
   methods: {
     ...mapActions('classroom', ['getClassrooms']),
     resetForm() {
+      this.email = ''
+      this.password = ''
+      this.password_confirmation = ''
+
       this.tahun = ''
       this.nominal = ''
       this.id = ''
@@ -218,13 +222,14 @@ export default {
       this.$store
         .dispatch('user/register', dataSend)
         .then((resp) => {
-          console.log(resp)
+          console.log("wwwwwwwww",resp)
           if (resp.status === 200) {
             this.$bvModal.hide('modal-add-student');
             this.$store.dispatch('student/getStudents');
-            this.resetForm();
+            // this.resetForm();
             Swal.fire(`Success`, `Data has been added!`, 'success');
-          } else {
+          } 
+          else {
             console.log('Add error')
             Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
           }

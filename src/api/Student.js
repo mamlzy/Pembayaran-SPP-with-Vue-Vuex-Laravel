@@ -17,8 +17,8 @@ export default {
     console.log(payload.data, 'Data Update')
     return Api.put(`${END_POINT}/${payload.id}`, payload.data)
   },
-  delete(id) {
-    return Api.delete(`${END_POINT}/${id}`)
+  delete(payload) {
+    return Api.put(`${END_POINT}/delete/${payload.id}`, payload.data)
   },
   destroy() {
     return Api.delete(END_POINT)

@@ -110,33 +110,7 @@
                 </ValidationProvider>
               </b-form-group>
             </b-col>
-          </b-row>
-          <!-- SPP -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  SPP :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="id_spp" rules="required">
-                  <b-form-select
-                    id="input-3"
-                    v-model="id_spp"
-                    :options="tuitions"
-                    value-field="id"
-                    text-field="nominal"
-                    required
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                    </template>
-                  </b-form-select>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+        </b-row>
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>
@@ -158,7 +132,6 @@ export default {
       id_kelas: null,
       alamat: null,
       no_telp: null,
-      id_spp: null,
     }
   },
   computed: {
@@ -171,12 +144,16 @@ export default {
     ...mapActions('tuition', ['getTuitions']),
     onSubmit() {
       const dataSend = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.password_confirmation,
+
         nis: this.nis,
         nama: this.nama,
         id_kelas: this.id_kelas,
         alamat: this.alamat,
         no_telp: this.no_telp,
-        id_spp: this.id_spp,
       };
       this.$store
         .dispatch('student/updateStudent', {
@@ -208,7 +185,6 @@ export default {
       this.id_kelas = this.dataUpdate.id_kelas;
       this.alamat = this.dataUpdate.alamat;
       this.no_telp = this.dataUpdate.no_telp;
-      this.id_spp = this.dataUpdate.id_spp;
     }
   },
   mounted() {

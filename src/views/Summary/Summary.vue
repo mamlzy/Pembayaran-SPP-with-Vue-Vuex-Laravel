@@ -43,8 +43,7 @@
             <img src="purple/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
             <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
             </h4>
-            <h2 class="mb-5">95,5741</h2>
-            <h6 class="card-text">Increased by 5%</h6>
+            <h2 class="mb-5">{{ onlineCount ? onlineCount : 0 }}</h2>
           </div>
         </div>
       </div>
@@ -89,17 +88,18 @@ export default {
     }
   },
   computed: {
-    ...mapState('summary', ['studentsCount', 'classCount', 'classPerMajorCount']),
+    ...mapState('summary', ['studentsCount', 'classCount', 'classPerMajorCount','onlineCount']),
     
   },
   methods: {
-    ...mapActions('summary', ['countStudents','countClassrooms','countClassPerMajor']),
+    ...mapActions('summary', ['countStudents','countClassrooms','countClassPerMajor','countOnline']),
     ...mapActions('user', ['getLogin']),
     
   },
   mounted() {
     this.countStudents()
     this.countClassrooms()
+    this.countOnline()
     this.countClassPerMajor()
     // this.getLogin()
     // .then(() => {

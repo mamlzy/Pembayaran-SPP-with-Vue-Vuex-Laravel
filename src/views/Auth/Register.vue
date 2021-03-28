@@ -226,13 +226,18 @@ export default {
       }
       this.$store
       .dispatch('user/register', dataSend)
-      .then(() => {
-        this.$router.push({ name: 'Login' })
+      .then((resp) => {
+          console.log("wwwwwwwww",resp)
+          if (resp.status === 200) {
+            this.$router.push({ name: 'Login' })
+          } 
+          else {
+            console.log('Register Error')
+            this.errors = error.response.data.errors
+          }
       })
       .catch(error => {
-        if(error.response.status === 422) {
           this.errors = error.response.data.errors
-        }
       }) 
     }
   },

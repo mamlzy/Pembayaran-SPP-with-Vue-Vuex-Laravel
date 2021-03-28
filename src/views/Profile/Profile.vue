@@ -15,8 +15,33 @@
   <div class="col-md-12 px-0">
     <div class="card shadow">
       <div class="card-body">
-        <ValidationObserver v-slot="{ handleSubmit }">
+        <!-- <ValidationObserver v-slot="{ handleSubmit }">
+          <b-form class="forms-sample" ref="" @submit.prevent="handleSubmit(submitFile)"> -->
 
+            <!-- <form method="POST" enctype="multipart/form-data"> -->
+              <!-- <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label for="customFile" class="custom-file-label">Choose an Image</label>
+              </div> -->
+              <!-- <button class="btn btn-success mt-5" type="submit">Upload Profile</button> -->
+            <!-- </form> -->
+
+            <b-form-file
+              id=""
+              v-model="file"
+              :state="Boolean(file)"
+              placeholder="Choose a file or drop it here..."
+              drop-placeholder="Drop file here..."
+              @input="postImage($event)"
+            ></b-form-file>
+
+          <!-- </b-form>
+        </ValidationObserver> -->
+          <div class="mt-3 mb-4">Selected file: {{ file ? file.name : '' }}</div>
+          <div v-if="imagePreview" class="mb-5">
+            <img :src="imagePreview" class="figure-img img-fluid rounded" style="max-height:100px;" alt="profile picture">
+          </div>
+        <ValidationObserver v-slot="{ handleSubmit }">
           <b-form class="forms-sample" ref="" @submit.prevent="handleSubmit(onSubmit)">
             <div class="row">
               <input type="hidden" v-model="old_name" class="form-control" id="old_name">
@@ -122,12 +147,30 @@ export default {
       password: null,
       new_password: null,
       new_password_confirmation: null,
+
+      file: null,
+      imagePreview: null
     }
   },
   computed: {
     ...mapState('user', ['authData'])
   },
   methods: {
+    postImage(event) {
+      console.log("NAMA IMAGE ==>", this.file.name)
+      const formData = new FormData();
+      formData.append('file', this.file);
+      // formData.append('file', event.target.files[0])
+      console.log("FORM DATA ==>", formData)
+      this.$store.dispatch('user/postImage', formData)
+      .then((resp) => {
+        console.log('from then UPLOAD IMAGE => ', resp);
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire('Error', 'Something went wrong!', 'error');
+      });
+    },
     ...mapActions('user', ['getAuth']),
     resetAllForm() {
       this.name = ''

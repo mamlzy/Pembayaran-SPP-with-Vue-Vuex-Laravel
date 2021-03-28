@@ -64,41 +64,41 @@ export default {
           field: 'id',
           thClass: 'bg-pink',
         },
+        // {
+        //   label: 'Petugas',
+        //   field: 'nama_petugas',
+        //   thClass: 'bg-pink',
+        // },
         {
-          label: 'Petugas',
-          field: 'nama_petugas',
+          label: 'Nama Siswa',
+          field: 'nama_siswa',
           thClass: 'bg-pink',
         },
-        {
-          label: 'NISN',
-          field: 'nisn',
-          thClass: 'bg-pink',
-        },
-        {
-          label: 'Tanggal Bayar',
-          field: 'tgl_bayar',
-          thClass: 'bg-pink',
-        },
-        {
-          label: 'Tahun Bayar',
-          field: 'tahun_bayar',
-          thClass: 'bg-pink',
-        },
-        {
-          label: 'SPP',
-          field: 'spp',
-          thClass: 'bg-pink',
-        },
-        {
-          label: 'Jumlah Bayar',
-          field: 'jumlah_bayar',
-          thClass: 'bg-pink',
-        },
-        {
-          label: 'Status',
-          field: 'status',
-          thClass: 'bg-pink',
-        },
+        // {
+        //   label: 'Tanggal Bayar',
+        //   field: 'tgl_bayar',
+        //   thClass: 'bg-pink',
+        // },
+        // {
+        //   label: 'Tahun Bayar',
+        //   field: 'tahun_bayar',
+        //   thClass: 'bg-pink',
+        // },
+        // {
+        //   label: 'SPP',
+        //   field: 'spp',
+        //   thClass: 'bg-pink',
+        // },
+        // {
+        //   label: 'Jumlah Bayar',
+        //   field: 'jumlah_bayar',
+        //   thClass: 'bg-pink',
+        // },
+        // {
+        //   label: 'Status',
+        //   field: 'status',
+        //   thClass: 'bg-pink',
+        // },
         {
           label: 'Action',
           field: 'action',

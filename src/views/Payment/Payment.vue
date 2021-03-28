@@ -46,8 +46,8 @@
               <!-- Custom Rows -->
               <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'status'">
-                  <span v-if="props.row.status == 1">Belum Dibayar</span> 
-                  <span v-if="props.row.status == 2">Dibayar</span> 
+                  <span v-if="props.row.status == 1">Belum Transaksi</span> 
+                  <span v-if="props.row.status == 2">Pending</span> 
                 </span>
                 <span v-else>
                   {{props.formattedRow[props.column.field]}}

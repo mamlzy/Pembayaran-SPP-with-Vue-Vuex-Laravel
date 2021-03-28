@@ -32,9 +32,7 @@ export const login = ({commit}, user) => {
 
 export const register = ({commit}, user) => {
   // console.log("REGISTER DATA ====>",  user)
-  User.register(user).then(response => {
-    return response
-  })
+  return User.register(user)
 }
 
 export const updateUser = ({commit}, payload) => {
@@ -45,6 +43,11 @@ export const updateUser = ({commit}, payload) => {
 export const addUser = ({commit}, payload) => {
   console.log(payload, 'Data Store')
   return User.register(payload)
+}
+
+export const postImage = ({commit}, payload) => {
+  console.log('POST IMAGE ACTION ==>', payload)
+  return User.postImage(payload)
 }
 
 export const deleteUser = ({commit}, payload) => {

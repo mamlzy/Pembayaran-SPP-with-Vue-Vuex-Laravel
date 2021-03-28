@@ -66,17 +66,19 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import User from '../api/User'
 
 export default {
   methods: {
     logout() {
       User.logout().then(() => {
+        // console.log(resp)
         localStorage.removeItem('auth')
         this.$router.push({ name: 'Login' })
       })
     }
-  }
+  },
 }
 </script>
 

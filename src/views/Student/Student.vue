@@ -123,12 +123,6 @@ export default {
           tdClass: 'bg-light',
         },
         {
-          label: 'SPP',
-          field: 'spp',
-          thClass: 'bg-pink',
-          tdClass: 'bg-light',
-        },
-        {
           label: 'Action',
           field: 'action',
           sortable: false,
@@ -161,7 +155,10 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$store.dispatch('student/deleteStudent', payload)
+          this.$store.dispatch('student/deleteStudent', {
+            id: payload.id,
+            data: payload,
+        })
           .then((resp) => {
             if (resp.status === 200) {
               this.$store.dispatch('student/getStudents');

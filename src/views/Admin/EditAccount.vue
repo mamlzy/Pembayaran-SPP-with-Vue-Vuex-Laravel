@@ -140,7 +140,7 @@ export default {
       options: [
         { value: 'admin', text: 'Admin' },
         { value: 'officer', text: 'Officer' },
-        { value: 'student', text: 'Student' },
+        // { value: 'student', text: 'Student' },
       ],
       name: null,
       email: null,
