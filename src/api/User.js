@@ -25,7 +25,9 @@ export default {
   store(payload) {
     return Api.post(END_POINT, payload)
   },
-  update(payload) {
+  async update(payload) {
+    await Csrf.getCookie()
+
     return Api.put(`${END_POINT}/${payload.id}`, payload.data)
   },
   delete(id) {

@@ -62,47 +62,48 @@ export default {
         {
           label: 'No',
           field: 'id',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Petugas',
           field: 'nama_petugas',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'NISN',
           field: 'nisn',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Tanggal Bayar',
           field: 'tgl_bayar',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Tahun Bayar',
           field: 'tahun_bayar',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'SPP',
           field: 'spp',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Jumlah Bayar',
           field: 'jumlah_bayar',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Status',
           field: 'status',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Action',
           field: 'action',
-          thClass: 'bg-primary',
+          sortable: false,
+          thClass: 'bg-pink',
         },
       ],
       histories: null

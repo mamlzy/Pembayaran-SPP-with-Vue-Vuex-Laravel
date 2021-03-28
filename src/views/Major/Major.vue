@@ -84,22 +84,23 @@ export default {
         {
           label: 'No',
           field: 'id',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Nama Jurusan',
           field: 'nama_jurusan',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Deskripsi',
           field: 'deskripsi',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Action',
           field: 'action',
-          thClass: 'bg-primary',
+          sortable: false,
+          thClass: 'bg-pink',
         },
       ],
     };

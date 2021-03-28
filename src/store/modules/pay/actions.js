@@ -7,7 +7,7 @@ import Pay from '../../../api/Pay'
 // }
 
 export const doPayment = ({commit}, payload) => {
-  // console.log('ACTION ====>', payload)
+  console.log('ACTION DO PAYMENT ====>', payload)
   return Pay.getToken(payload).then(response => {
     console.log('ACTION DO PAYMENT ====>', response)
     commit('SET_TRANSACTION_TOKEN', response.data)
@@ -23,7 +23,7 @@ export const changeStatus = ({commit}, payload) => {
 }
 
 export const getSuccess = ({commit}, payload) => {
-  // console.log('ACTION ====>', payload)
+  console.log('ACTION SUCCESS ====>', payload)
   // return Pay.getToken(payload).then(response => {
     // console.log('ACTION GET SUCCESS ====>', payload)
     commit('SET_GET_SUCCESS', payload)

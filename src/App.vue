@@ -15,7 +15,7 @@
         <div 
           :class="{
             'main-panel': isLoggedIn,
-            'content-wrapper d-flex align-items-center auth': !isLoggedIn
+            'content-wrapper d-flex align-items-center auth bg-gradient-primary': !isLoggedIn
         }">
           <div 
             :class="{
@@ -54,10 +54,34 @@ export default {
 </script>
 
 <style>
-/* .modal-body {
-  overflow-y: visible !important;
-} */
-.modal-content {
-  background-color: white !important;
-}
+  /* .modal-body {
+    overflow-y: visible !important;
+  } */
+  .modal-content {
+    background-color: white !important;
+  }
+  .bg-pink {
+    background: #ca95ff !important;
+    color: white !important;
+  }
+  /* .bg-light {
+    background: #F7F7F7 !important;
+  } */
+
+  .vgt-global-search {
+    background: #ca95ff !important;
+  }
+  
+  .magnifying-glass {
+    border: 2px solid white !important;
+  }
+
+  .magnifying-glass::before {
+    background: white !important;
+  }
+
+  .vgt-wrap__footer, .page-info__label, .footer__navigation__page-btn, .footer__row-count__select {
+    background: #ca95ff !important;
+    color: white !important;
+  }
 </style>

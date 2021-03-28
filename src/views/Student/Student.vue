@@ -88,50 +88,51 @@ export default {
         {
           label: 'NISN',
           field: 'id',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
           tdClass: 'bg-light',
         },
         {
           label: 'NIS',
           field: 'nis',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
         {
           label: 'Nama',
           field: 'nama',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
         {
           label: 'Kelas',
           field: 'nama_kelas',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
         {
           label: 'Alamat',
           field: 'alamat',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
         {
           label: 'No Telepon',
           field: 'no_telp',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
         {
           label: 'SPP',
           field: 'spp',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
         {
           label: 'Action',
           field: 'action',
-          thClass: 'bg-primary',
+          sortable: false,
+          thClass: 'bg-pink',
           tdClass: 'bg-light',
         },
       ],
@@ -185,28 +186,5 @@ export default {
 </script>
 
 <style>
-  .bg-primary {
-    background: #ca95ff !important;
-    color: white !important;
-  }
-  /* .bg-light {
-    background: #F7F7F7 !important;
-  } */
 
-  .vgt-global-search {
-    background: #ca95ff !important;
-  }
-  
-  .magnifying-glass {
-    border: 2px solid white !important;
-  }
-
-  .magnifying-glass::before {
-    background: white !important;
-  }
-
-  .vgt-wrap__footer, .page-info__label, .footer__navigation__page-btn, .footer__row-count__select {
-    background: #ca95ff !important;
-    color: white !important;
-  } 
 </style>

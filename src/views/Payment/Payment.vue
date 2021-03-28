@@ -14,9 +14,13 @@
       </nav> -->
     </div>
     <div class="card shadow">
-      <div class="card-header ">
+      <div class="card-header d-flex justify-content-between">
         <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()">
           Add Data
+          <i class="mdi mdi-plus-box"></i>
+        </button>
+        <button type="button" class="btn btn-sm mr-3 btn-social-icon-text btn-gradient-success" @click="exportCsv()">
+          Export CSV
           <i class="mdi mdi-plus-box"></i>
         </button>
       </div>
@@ -109,53 +113,60 @@ export default {
         {
           label: 'No',
           field: 'id',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Petugas',
           field: 'nama_petugas',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
-          label: 'NISN',
-          field: 'nisn',
-          thClass: 'bg-primary',
+          label: 'Nama Siswa',
+          field: 'nama',
+          thClass: 'bg-pink',
         },
         {
           label: 'Tanggal Bayar',
           field: 'tgl_bayar',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
+        },
+        {
+          label: 'Bulan Bayar',
+          field: 'bulan_bayar',
+          thClass: 'bg-pink',
         },
         {
           label: 'Tahun Bayar',
           field: 'tahun_bayar',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'SPP',
           field: 'spp',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Jumlah Bayar',
           field: 'jumlah_bayar',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Status',
           field: 'status',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Action',
           field: 'action',
-          thClass: 'bg-primary',
+          sortable: false,
+          sortable: false,
+          thClass: 'bg-pink',
         },
       ],
     };
   },
   computed: {
-    ...mapState('payment', ['payments']),
+    ...mapState('payment', ['payments','dataUpdate']),
     ...mapState('pay', ['transactionToken','getSuccess']),
     getToken() {
       return this.$store.getters['pay/getToken']
@@ -222,6 +233,7 @@ export default {
     openModalUpdate(payload) {
       console.log("modal payment")
       this.$store.commit('payment/SET_DATA_UPDATE', payload)
+      console.log("DATA UPDATE ===>", this.dataUpdate)
       this.$bvModal.show('modal-edit-payment')
     },
     deletePayment(payload) {

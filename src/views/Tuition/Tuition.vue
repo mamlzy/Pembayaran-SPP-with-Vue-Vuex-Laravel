@@ -84,22 +84,23 @@ export default {
         {
           label: 'No',
           field: 'id',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Tahun',
           field: 'tahun',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Nominal',
           field: 'nominal',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Action',
           field: 'action',
-          thClass: 'bg-primary',
+          sortable: false,
+          thClass: 'bg-pink',
         },
       ],
     };

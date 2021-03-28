@@ -84,27 +84,28 @@ export default {
         {
           label: 'No',
           field: 'id',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Name',
           field: 'name',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Email',
           field: 'email',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Role',
           field: 'role',
-          thClass: 'bg-primary',
+          thClass: 'bg-pink',
         },
         {
           label: 'Action',
           field: 'action',
-          thClass: 'bg-primary',
+          sortable: false,
+          thClass: 'bg-pink',
         },
       ],
     }

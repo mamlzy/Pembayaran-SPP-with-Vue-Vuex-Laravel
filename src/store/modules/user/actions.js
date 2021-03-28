@@ -31,13 +31,14 @@ export const login = ({commit}, user) => {
 }
 
 export const register = ({commit}, user) => {
+  // console.log("REGISTER DATA ====>",  user)
   User.register(user).then(response => {
     return response
   })
 }
 
 export const updateUser = ({commit}, payload) => {
-  console.log('UPDATE USER ACTION ===>', payload)
+  // console.log('UPDATE USER ACTION ===>', payload)
   return User.update(payload)
 }
 

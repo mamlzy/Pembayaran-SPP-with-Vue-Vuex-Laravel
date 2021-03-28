@@ -20,7 +20,7 @@ export const getDetailHistory = ({commit}, payload) => {
 }
 
 export const updatePayment = ({commit}, payload) => {
-  // console.log(payload.data, 'Data Update')
+  console.log(payload.data, 'Data Update')
   return Payment.update(payload)
 }
 

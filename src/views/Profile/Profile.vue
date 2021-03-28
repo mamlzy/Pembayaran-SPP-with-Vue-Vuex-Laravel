@@ -19,83 +19,84 @@
 
           <b-form class="forms-sample" ref="" @submit.prevent="handleSubmit(onSubmit)">
             <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <ValidationProvider v-slot="{ errors }" name="Name" rules="required">
-                        <label for="name">Name</label>
-                        <input type="text" v-model="name" class="form-control" id="name" placeholder="Name">
+              <input type="hidden" v-model="old_name" class="form-control" id="old_name">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <ValidationProvider v-slot="{ errors }" name="Name" rules="required">
+                    <label for="name">Name</label>
+                    <input type="text" v-model="name" class="form-control" id="name" placeholder="Name">
+                    <span class="small text-danger">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                </div>
+                <div class="form-group">
+                  <ValidationProvider v-slot="{ errors }" name="Email" rules="required">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" placeholder="Email" disabled>
+                    <span class="small text-danger">{{ errors[0] }}</span>
+                  </ValidationProvider>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <!-- Old Password -->
+                <b-row>
+                  <b-col cols="12">
+                    <b-form-group>
+                      <label for="">
+                        Old Password :
+                      </label>
+                      <ValidationProvider v-slot="{ errors }" name="Old Password" rules="min:8">
+                        <b-form-input
+                          v-model="password"
+                          type="password"
+                          placeholder="Enter Old Password"
+                        ></b-form-input>
                         <span class="small text-danger">{{ errors[0] }}</span>
                       </ValidationProvider>
-                    </div>
-                    <div class="form-group">
-                      <ValidationProvider v-slot="{ errors }" name="Email" rules="required">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" v-model="email" class="form-control" id="exampleInputEmail1" placeholder="Email" disabled>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <!-- New Password -->
+                <b-row>
+                  <b-col cols="12">
+                    <b-form-group>
+                      <label for="">
+                        New Password :
+                      </label>
+                      <ValidationProvider v-slot="{ errors }" name="New Password" rules="min:8">
+                        <b-form-input
+                          v-model="new_password"
+                          type="password"
+                          placeholder="Enter New Password"
+                        ></b-form-input>
                         <span class="small text-danger">{{ errors[0] }}</span>
                       </ValidationProvider>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <!-- Old Password -->
-                    <b-row>
-                      <b-col cols="12">
-                        <b-form-group>
-                          <label for="">
-                            Old Password :
-                          </label>
-                          <ValidationProvider v-slot="{ errors }" name="Old Password" rules="min:8">
-                            <b-form-input
-                              v-model="password"
-                              type="password"
-                              placeholder="Enter Old Password"
-                            ></b-form-input>
-                            <span class="small text-danger">{{ errors[0] }}</span>
-                          </ValidationProvider>
-                        </b-form-group>
-                      </b-col>
-                    </b-row>
-                    <!-- New Password -->
-                    <b-row>
-                      <b-col cols="12">
-                        <b-form-group>
-                          <label for="">
-                            New Password :
-                          </label>
-                          <ValidationProvider v-slot="{ errors }" name="New Password" rules="min:8">
-                            <b-form-input
-                              v-model="new_password"
-                              type="password"
-                              placeholder="Enter New Password"
-                            ></b-form-input>
-                            <span class="small text-danger">{{ errors[0] }}</span>
-                          </ValidationProvider>
-                        </b-form-group>
-                      </b-col>
-                    </b-row>
-                    <!-- Password Confirmation -->
-                    <b-row>
-                      <b-col cols="12">
-                        <b-form-group>
-                          <label for="">
-                            Password Confirmation :
-                          </label>
-                          <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="min:8">
-                            <b-form-input
-                              v-model="new_password_confirmation"
-                              type="password"
-                              placeholder="Enter Password Confirmation"
-                            ></b-form-input>
-                            <span class="small text-danger">{{ errors[0] }}</span>
-                          </ValidationProvider>
-                        </b-form-group>
-                      </b-col>
-                    </b-row>
-                    <div class="float-right">
-                      <button class="btn btn-danger mr-2">Reset</button>
-                      <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-                      <!-- {{ authData }} -->
-                    </div>
-                  </div>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <!-- Password Confirmation -->
+                <b-row>
+                  <b-col cols="12">
+                    <b-form-group>
+                      <label for="">
+                        Password Confirmation :
+                      </label>
+                      <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="min:8">
+                        <b-form-input
+                          v-model="new_password_confirmation"
+                          type="password"
+                          placeholder="Enter Password Confirmation"
+                        ></b-form-input>
+                        <span class="small text-danger">{{ errors[0] }}</span>
+                      </ValidationProvider>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <div class="float-right">
+                  <div class="btn btn-danger mr-2" @click="resetAllForm()">Reset</div>
+                  <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+                  <!-- {{ authData }} -->
+                </div>
+              </div>
             </div>
           </b-form>
         
@@ -114,6 +115,7 @@ import {mapState, mapActions} from 'vuex'
 export default {
   data() {
     return {
+      old_name: null,
       name: null,
       email: null,
       role: null,
@@ -127,6 +129,13 @@ export default {
   },
   methods: {
     ...mapActions('user', ['getAuth']),
+    resetAllForm() {
+      this.name = ''
+      this.email = ''
+      this.password = ''
+      this.new_password = ''
+      this.new_password_confirmation = ''
+    },
     resetForm() {
       this.password = ''
       this.new_password = ''
@@ -134,6 +143,7 @@ export default {
     },
     onSubmit() {
       const dataSend = {
+        old_name: this.old_name,
         name: this.name,
         email: this.email,
         role: this.role,
@@ -165,6 +175,7 @@ export default {
         });
     },
     setData() {
+      this.old_name = this.authData.name;
       this.name = this.authData.name;
       this.email = this.authData.email;
       this.role = this.authData.role;

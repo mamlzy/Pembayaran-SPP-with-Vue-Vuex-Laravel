@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="modal-edit-payment" title="payment" scrollable hide-footer @show="setData()">
+  <b-modal id="modal-edit-payment" title="Payment" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Nama Petugas -->
@@ -11,38 +11,34 @@
                   Nama Petugas :
                 </label>
                 <ValidationProvider v-slot="{ errors }" name="Nama Petugas" rules="required">
-                  <b-form-select
-                    id="input-nama-petugas"
+                  <b-form-input
+                    id="input-"
                     v-model="id_user"
-                    :options="users"
-                    value-field="id"
-                    text-field="name"
+                    type="text"
                     required
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                    </template>
-                  </b-form-select>
+                    disabled
+                    placeholder="Enter Nama Petugas"
+                  ></b-form-input>
                   <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
               </b-form-group>
             </b-col>
           </b-row>
-          <!-- NISN -->
+          <!-- Siswa -->
           <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
                   <span class="text-danger">*</span>
-                  NISN :
+                  Siswa :
                 </label>
-                <ValidationProvider v-slot="{ errors }" name="nisn" rules="required|min:11">
+                <ValidationProvider v-slot="{ errors }" name="Siswa" rules="required">
                   <b-form-select
                     id="input-3"
                     v-model="nisn"
                     :options="students"
                     value-field="id"
-                    text-field="id"
+                    text-field="nama"
                     required
                   >
                     <template #first>
@@ -144,7 +140,7 @@
             </b-col>
           </b-row>
           <!-- Jumlah Bayar -->
-          <b-row>
+          <!-- <b-row>
             <b-col cols="12">
               <b-form-group>
                 <label for="">
@@ -163,7 +159,7 @@
                 </ValidationProvider>
               </b-form-group>
             </b-col>
-          </b-row>
+          </b-row> -->
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>
@@ -190,18 +186,18 @@ export default {
   },
   computed: {
     ...mapState('payment', ['dataUpdate']),
-    ...mapState('user', ['users']),
+    ...mapState('user', ['users','authData']),
     ...mapState('student', ['students']),
     ...mapState('tuition', ['tuitions']),
   },
   methods: {
-    ...mapActions('user', ['getUsers']),
+    ...mapActions('user', ['getUsers','getAuth']),
     ...mapActions('student', ['getStudents']),
     ...mapActions('tuition', ['getTuitions']),
     onSubmit() {
-      console.log('submitted')
+      // console.log('submitted')
       const dataSend = {
-        id_user: this.id_user,
+        id_user: this.authData.id,
         nisn: this.nisn,
         tgl_bayar: this.tgl_bayar,
         bulan_bayar: this.bulan_bayar,
@@ -209,6 +205,7 @@ export default {
         id_spp: this.id_spp,
         jumlah_bayar: this.jumlah_bayar,
       };
+      console.log("DATA SEND ==>", dataSend)
       this.$store
         .dispatch('payment/updatePayment', {
           id: this.dataUpdate.id,
@@ -233,7 +230,7 @@ export default {
     },
 
     setData() {
-      this.id_user = this.dataUpdate.id_user
+      this.id_user = this.authData.name
       this.nisn = this.dataUpdate.nisn
       this.tgl_bayar = this.dataUpdate.tgl_bayar
       this.bulan_bayar = this.dataUpdate.bulan_bayar
@@ -243,6 +240,7 @@ export default {
     }
   },
   mounted() {
+    this.getAuth()
     this.getUsers()
     this.getStudents()
     this.getTuitions()
