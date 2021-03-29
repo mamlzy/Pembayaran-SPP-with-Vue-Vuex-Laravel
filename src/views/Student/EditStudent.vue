@@ -2,115 +2,96 @@
   <b-modal id="modal-edit-student" title="Student" scrollable hide-footer @show="setData()">
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form @submit.prevent="handleSubmit(onSubmit)">
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  NIS :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="nis" rules="required|numeric|min:8|max:8">
-                  <b-form-input
-                    id="input-nis"
-                    v-model="nis"
-                    type="text"
-                    required
-                    placeholder="Enter nis"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+        <!-- NISN -->
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              NIS :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="nis" rules="required|numeric|min:8|max:8">
+              <b-form-input
+                id="input-nis"
+                v-model="nis"
+                type="text"
+                required
+                placeholder="Enter nis"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Nama -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Nama :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="nama" rules="required|min:3">
-                  <b-form-input
-                    id="input-nama"
-                    v-model="nama"
-                    type="text"
-                    required
-                    placeholder="Enter nama"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Nama :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="nama" rules="required|min:3">
+              <b-form-input
+                id="input-nama"
+                v-model="nama"
+                type="text"
+                required
+                placeholder="Enter nama"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Kelas -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Kelas :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="id_kelas" rules="required">
-                  <b-form-select
-                      id="input-3"
-                      v-model="id_kelas"
-                      :options="classrooms"
-                      value-field="id"
-                      text-field="nama_kelas"
-                      required
-                    >
-                      <template #first>
-                        <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                      </template>
-                    </b-form-select>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Kelas :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="id_kelas" rules="required">
+              <b-form-select
+                  id="input-3"
+                  v-model="id_kelas"
+                  :options="classrooms"
+                  value-field="id"
+                  text-field="nama_kelas"
+                  required
+                >
+                  <template #first>
+                    <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                  </template>
+                </b-form-select>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Alamat -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Alamat :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="alamat" rules="required">
-                  <b-form-input
-                    id="input-alamat"
-                    v-model="alamat"
-                    type="text"
-                    required
-                    placeholder="Enter alamat"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Alamat :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="alamat" rules="required">
+              <b-form-input
+                id="input-alamat"
+                v-model="alamat"
+                type="text"
+                required
+                placeholder="Enter alamat"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- NO Telepon -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  NO Telepon :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="no_telp" rules="required|numeric">
-                  <b-form-input
-                    id="input-no-telp"
-                    v-model="no_telp"
-                    type="text"
-                    required
-                    placeholder="Enter nomor telepon"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-        </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              NO Telepon :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="no_telp" rules="required|numeric">
+              <b-form-input
+                id="input-no-telp"
+                v-model="no_telp"
+                type="text"
+                required
+                placeholder="Enter nomor telepon"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>

@@ -1,14 +1,14 @@
 import User from '../../../api/User'
 
 export const getUsers = ({commit}) => {
-  User.all().then(response => {
+  return User.all().then(response => {
     commit('SET_USERS', response.data)
   })
 }
 
 export const getAuth = ({commit}) => {
   // console.log(payload.id)
-  User.auth().then(response => {
+  return User.auth().then(response => {
     // console.log("GET AUTH MUTATION ==>>",response)
     commit('SET_AUTH_DATA', response.data)
   })
@@ -16,7 +16,7 @@ export const getAuth = ({commit}) => {
 
 export const getLogin = ({commit}) => {
   // console.log(payload.id)
-  User.loginUser().then(response => {
+  return User.loginUser().then(response => {
     console.log("GET LOGIN MUTATION ==>>",response.data.role)
     // return response.data.role
     commit('SET_ROLE', response.data.role)
@@ -24,9 +24,8 @@ export const getLogin = ({commit}) => {
 }
 
 export const login = ({commit}, user) => {
-  User.login(user).then(response => {
+  return User.login(user).then(response => {
     commit('SET_AUTH_DATA', response.data)
-    return response
   })
 }
 

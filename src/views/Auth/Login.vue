@@ -65,21 +65,21 @@ export default {
       }
       // console.log(dataSend)
       this.$store.dispatch('user/login', dataSend)
-      // .then((resp) => {
-      //   console.log("wwwwwwwww",resp)
-      //     if (resp.status === 200) {
+      .then((resp) => {
+        // console.log("wwwwwwwww",resp)
+          // if (resp.status === 200) {
             localStorage.setItem('auth', 'true')
             this.$router.push({ name: 'Summary' })
-      //     } 
-      //     else {
-      //       console.log('Register Error')
-      //       this.failed = error.response.data.message
-      //     }
-      // })
-      // .catch(err => {
-      //   console.log("error ====>", err)
-      //   this.failed = err.response.data.message
-      // })
+          // } 
+          // else {
+          //   console.log('Register Error')
+          //   this.failed = error.response.data.message
+          // }
+      })
+      .catch(err => {
+        console.log("error ====>", err)
+        this.failed = err.response.data.message
+      })
     }
   }
 };

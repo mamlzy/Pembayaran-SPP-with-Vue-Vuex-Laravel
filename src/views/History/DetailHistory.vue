@@ -18,6 +18,7 @@
               <label 
               class="badge"
               :class="{
+                'badge-success': history.transaction_status == 'settlement',
                 'badge-warning': history.transaction_status == 'pending',
                 'badge-danger': history.transaction_status == 'expire'
                 }"

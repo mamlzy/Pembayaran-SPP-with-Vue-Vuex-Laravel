@@ -3,142 +3,118 @@
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Nama Petugas -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Nama Petugas :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="Nama Petugas" rules="required">
-                  <b-form-input
-                    id="input-"
-                    v-model="id_user"
-                    type="text"
-                    required
-                    disabled
-                    placeholder="Enter Nama Petugas"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Nama Petugas :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="Nama Petugas" rules="required">
+              <b-form-input
+                id="input-"
+                v-model="id_user"
+                type="text"
+                required
+                disabled
+                placeholder="Enter Nama Petugas"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Siswa -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Siswa :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="Siswa" rules="required">
-                  <b-form-select
-                    id="input-3"
-                    v-model="nisn"
-                    :options="students"
-                    value-field="id"
-                    text-field="nama"
-                    required
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                    </template>
-                  </b-form-select>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Siswa :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="Siswa" rules="required">
+              <b-form-select
+                id="input-3"
+                v-model="nisn"
+                :options="students"
+                value-field="id"
+                text-field="nama"
+                required
+              >
+                <template #first>
+                  <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+              </b-form-select>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Tanggal Bayar -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Tanggal Bayar :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="tgl_bayar" rules="required">
-                  <b-form-input
-                    id="input-tgl-bayar"
-                    v-model="tgl_bayar"
-                    type="text"
-                    required
-                    placeholder="Enter Tanggal Bayar"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Tanggal Bayar :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="tgl_bayar" rules="required">
+              <b-form-input
+                id="input-tgl-bayar"
+                v-model="tgl_bayar"
+                type="text"
+                required
+                placeholder="Enter Tanggal Bayar"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Bulan Bayar -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Bulan Bayar :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="bulan_bayar" rules="required">
-                  <b-form-input
-                    id="input-bulan-bayar"
-                    v-model="bulan_bayar"
-                    type="text"
-                    required
-                    placeholder="Enter Bulan Bayar"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Bulan Bayar :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="bulan_bayar" rules="required">
+              <b-form-input
+                id="input-bulan-bayar"
+                v-model="bulan_bayar"
+                type="text"
+                required
+                placeholder="Enter Bulan Bayar"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Tahun Bayar -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Tahun Bayar :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="tahun_bayar" rules="required|numeric">
-                  <b-form-input
-                    id="input-tahun-bayar"
-                    v-model="tahun_bayar"
-                    type="text"
-                    required
-                    placeholder="Enter Tahun Bayar"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Tahun Bayar :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="tahun_bayar" rules="required|numeric">
+              <b-form-input
+                id="input-tahun-bayar"
+                v-model="tahun_bayar"
+                type="text"
+                required
+                placeholder="Enter Tahun Bayar"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- SPP -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  SPP :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="spp" rules="required|numeric">
-                  <b-form-select
-                    id="input-3"
-                    v-model="id_spp"
-                    :options="tuitions"
-                    value-field="id"
-                    text-field="nominal"
-                    required
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                    </template>
-                  </b-form-select>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              SPP :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="spp" rules="required|numeric">
+              <b-form-select
+                id="input-3"
+                v-model="id_spp"
+                :options="tuitions"
+                value-field="id"
+                text-field="nominal"
+                required
+              >
+                <template #first>
+                  <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+              </b-form-select>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Jumlah Bayar -->
           <!-- <b-row>
             <b-col cols="12">
@@ -157,9 +133,7 @@
                   ></b-form-input>
                   <span class="small text-danger">{{ errors[0] }}</span>
                 </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row> -->
+              </b-form-group> -->
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>

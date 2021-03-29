@@ -1,3 +1,3 @@
-export const getRole = (state, payload) => {
-  state.role
+export const getRole = (state) => {
+  state.authData.role
 }

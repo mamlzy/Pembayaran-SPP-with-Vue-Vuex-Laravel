@@ -2,5 +2,5 @@ export default {
   users: [],
   authData: [],
   dataUpdate: [],
-  role: [],
+  role: 'wkwk',
 }

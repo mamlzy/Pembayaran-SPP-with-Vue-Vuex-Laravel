@@ -44,7 +44,7 @@ export default {
     return Api.get('/user')
   },
   loginUser() {
-    return Api.get('/user')
+    return Api.get('/getuser')
   },
   postImage(payload) {
     return Api.post(`${END_POINT}/postimage`, payload)

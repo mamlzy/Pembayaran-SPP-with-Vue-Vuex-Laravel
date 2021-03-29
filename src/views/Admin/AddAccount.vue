@@ -3,108 +3,88 @@
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Name -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Name :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="Name" rules="required|min:2">
-                  <b-form-input
-                    v-model="name"
-                    type="text"
-                    required
-                    placeholder="Enter Name"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Name :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="Name" rules="required|min:2">
+              <b-form-input
+                v-model="name"
+                type="text"
+                required
+                placeholder="Enter Name"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- email -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  email :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
-                  <b-form-input
-                    v-model="email"
-                    type="text"
-                    required
-                    placeholder="Enter Email"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              email :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+              <b-form-input
+                v-model="email"
+                type="text"
+                required
+                placeholder="Enter Email"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Role -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Role :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="role" rules="required">
-                  <b-form-select
-                    v-model="role"
-                    :options="options"
-                    required
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                    </template>
-                  </b-form-select>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Role :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="role" rules="required">
+              <b-form-select
+                v-model="role"
+                :options="options"
+                required
+              >
+                <template #first>
+                  <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+              </b-form-select>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Password -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Password :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="password" rules="required|min:8">
-                  <b-form-input
-                    v-model="password"
-                    type="password"
-                    required
-                    placeholder="Enter Password"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Password :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="password" rules="required|min:8">
+              <b-form-input
+                v-model="password"
+                type="password"
+                required
+                placeholder="Enter Password"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Password Confirmation -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Password Confirmation :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="required|min:8">
-                  <b-form-input
-                    v-model="password_confirmation"
-                    type="password"
-                    required
-                    placeholder="Enter Password Confirmation"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Password Confirmation :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="Password Confirmation" rules="required|min:8">
+              <b-form-input
+                v-model="password_confirmation"
+                type="password"
+                required
+                placeholder="Enter Password Confirmation"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>

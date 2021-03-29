@@ -25,22 +25,11 @@
               </div> -->
               <!-- <button class="btn btn-success mt-5" type="submit">Upload Profile</button> -->
             <!-- </form> -->
-
-            <b-form-file
-              id=""
-              v-model="file"
-              :state="Boolean(file)"
-              placeholder="Choose a file or drop it here..."
-              drop-placeholder="Drop file here..."
-              @input="postImage($event)"
-            ></b-form-file>
+            
 
           <!-- </b-form>
         </ValidationObserver> -->
-          <div class="mt-3 mb-4">Selected file: {{ file ? file.name : '' }}</div>
-          <div v-if="imagePreview" class="mb-5">
-            <img :src="imagePreview" class="figure-img img-fluid rounded" style="max-height:100px;" alt="profile picture">
-          </div>
+
         <ValidationObserver v-slot="{ handleSubmit }">
           <b-form class="forms-sample" ref="" @submit.prevent="handleSubmit(onSubmit)">
             <div class="row">
@@ -60,6 +49,20 @@
                     <span class="small text-danger">{{ errors[0] }}</span>
                   </ValidationProvider>
                 </div>
+
+                <b-img thumbnail fluid 
+                class="d-block mx-auto shadow-lg"
+                :src="`http://localhost:8000/avatar/${authData.image ? authData.image : 'default.jpg'}`" style="max-height:200px;" alt="Image 1"></b-img>
+                <b-form-file
+                  id=""
+                  v-model="file"
+                  :state="Boolean(file)"
+                  placeholder="Choose a file or drop it here..."
+                  drop-placeholder="Drop file here..."
+                  @input="postImage()"
+                ></b-form-file>
+                <!-- <div class="mt-3 mb-4">Selected file: {{ file ? file.name : '' }}</div> -->
+                
               </div>
               <div class="col-md-6">
                 <!-- Old Password -->
@@ -156,7 +159,7 @@ export default {
     ...mapState('user', ['authData'])
   },
   methods: {
-    postImage(event) {
+    postImage() {
       console.log("NAMA IMAGE ==>", this.file.name)
       const formData = new FormData();
       formData.append('file', this.file);
@@ -165,6 +168,7 @@ export default {
       this.$store.dispatch('user/postImage', formData)
       .then((resp) => {
         console.log('from then UPLOAD IMAGE => ', resp);
+        this.$store.dispatch('user/getAuth');
       })
       .catch((err) => {
         console.log(err);
@@ -225,8 +229,12 @@ export default {
     }
   },
   mounted() {
-    this.getAuth()
-    this.setData()
+    this.getAuth().then(() => {
+      this.setData()
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 }
 </script>

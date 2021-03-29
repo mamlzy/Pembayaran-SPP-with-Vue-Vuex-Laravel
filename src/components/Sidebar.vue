@@ -4,7 +4,11 @@
       <li class="nav-item nav-profile" v-if="authData">
         <router-link to="/profile" class="nav-link">
           <div class="nav-profile-image">
-            <img src="purple/assets/images/faces/face1.jpg" alt="profile">
+            <img 
+              :src="`http://localhost:8000/avatar/${authData.image ? authData.image : 'default.jpg'}`" 
+              alt="profile"
+            >
+            <!-- <img :src="'/avatar/' + authData.image" alt="profile"> -->
             <span class="login-status online"></span>
             <!--change to offline or busy as needed-->
           </div>
@@ -54,13 +58,13 @@
           </router-link>
         <div class="border-bottom"></div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" v-if="authData.role == 'admin' || authData.role == 'officer'">
         <router-link to="/payments" active-class="text-primary" class="nav-link">
           <span class="menu-title">Payment</span>
             <i class="mdi mdi-cash-usd menu-icon"></i>
           </router-link>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" v-if="authData.role == 'admin' || authData.role == 'officer'">
         <router-link to="/history" active-class="text-primary" class="nav-link">
           <span class="menu-title">Transaction History</span>
             <i class="mdi mdi-history menu-icon"></i>

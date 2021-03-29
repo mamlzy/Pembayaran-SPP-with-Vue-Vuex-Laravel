@@ -3,52 +3,44 @@
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Nama Kelas -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Nama Kelas :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="nama_kelas" rules="required|min:2">
-                  <b-form-input
-                    id="input-nama-kelas"
-                    v-model="nama_kelas"
-                    type="text"
-                    required
-                    placeholder="Enter Nama kelas"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Nama Kelas :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="nama_kelas" rules="required|min:2">
+              <b-form-input
+                id="input-nama-kelas"
+                v-model="nama_kelas"
+                type="text"
+                required
+                placeholder="Enter Nama kelas"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Jurusan -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Jurusan :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="jurusan" rules="required">
-                  <b-form-select
-                    id="input-3"
-                    v-model="id_jurusan"
-                    :options="majors"
-                    value-field="id"
-                    text-field="nama_jurusan"
-                    required
-                  >
-                    <template #first>
-                      <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
-                    </template>
-                  </b-form-select>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Jurusan :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="jurusan" rules="required">
+              <b-form-select
+                id="input-3"
+                v-model="id_jurusan"
+                :options="majors"
+                value-field="id"
+                text-field="nama_jurusan"
+                required
+              >
+                <template #first>
+                  <b-form-select-option :value="null" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+              </b-form-select>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>

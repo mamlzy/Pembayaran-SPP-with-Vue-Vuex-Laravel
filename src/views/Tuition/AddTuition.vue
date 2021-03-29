@@ -3,47 +3,39 @@
     <ValidationObserver v-slot="{ handleSubmit }">
       <b-form ref="" @submit.prevent="handleSubmit(onSubmit)">
           <!-- Tahun -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Tahun :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="tahun" rules="required|min:4">
-                  <b-form-input
-                    id="input-tahun"
-                    v-model="tahun"
-                    type="text"
-                    required
-                    placeholder="Enter Tahun"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Tahun :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="tahun" rules="required|min:4">
+              <b-form-input
+                id="input-tahun"
+                v-model="tahun"
+                type="text"
+                required
+                placeholder="Enter Tahun"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <!-- Nominal -->
-          <b-row>
-            <b-col cols="12">
-              <b-form-group>
-                <label for="">
-                  <span class="text-danger">*</span>
-                  Nominal :
-                </label>
-                <ValidationProvider v-slot="{ errors }" name="nominal" rules="required">
-                  <b-form-input
-                    id="input-nominal"
-                    v-model="nominal"
-                    type="text"
-                    required
-                    placeholder="Enter Nominal"
-                  ></b-form-input>
-                  <span class="small text-danger">{{ errors[0] }}</span>
-                </ValidationProvider>
-              </b-form-group>
-            </b-col>
-          </b-row>
+          <b-form-group>
+            <label for="">
+              <span class="text-danger">*</span>
+              Nominal :
+            </label>
+            <ValidationProvider v-slot="{ errors }" name="nominal" rules="required">
+              <b-form-input
+                id="input-nominal"
+                v-model="nominal"
+                type="text"
+                required
+                placeholder="Enter Nominal"
+              ></b-form-input>
+              <span class="small text-danger">{{ errors[0] }}</span>
+            </ValidationProvider>
+          </b-form-group>
           <b-button class="btn btn-primary ml-auto float-right ml-4" type="submit" variant="light-primary">
             Submit
           </b-button>

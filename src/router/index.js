@@ -13,19 +13,21 @@ import Classrooms from '../views/Classroom/Classroom.vue'
 import Tuition from '../views/Tuition/Tuition.vue'
 import Payment from '../views/Payment/Payment.vue'
 import History from '../views/History/History.vue'
+// import Blank from '../views/404/Blank.vue'
 
 Vue.use(VueRouter)
 
 // const isAdmin = async (to, from, next) => {
-//   await store.dispatch['user/getLogin']
-//   if (store.state['user/role'] == 'admin') {
-//     return next();
-//   }
-//   console.log('gak ada role bro', store.getters['user/checkRole'])
-//   return next('/');
+//   await store.dispatch('user/getAuth')
+//     if (store.getters['user/getRole'] == 'admin') {
+//       console.log('ROLENYA ADA ==>', store.getters['user/getRole'])
+//       return next();
+//     }
+//     console.log('gak ada role bro', store.getters['user/getRole'])
+//     return next('/');
+
+//   // })
 // };
-
-
 
 // async function checkRole() {
 //   await store.dispatch['user/getAuth']
@@ -63,6 +65,7 @@ const routes = [
     component: Account,
     meta: { isAuthenticated: true },
     // meta: { isAdmin: true },
+    // beforeEnter: isAdmin
   },
   {
     path: '/majors',
@@ -104,6 +107,10 @@ const routes = [
     component: History,
     meta: { isAuthenticated: true }
   },
+  // {
+  //   path: '/404', alias: '*',
+  //   component: Blank,
+  // },
 ]
 
 const router = new VueRouter({
@@ -156,30 +163,30 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } 
-  else if (to.matched.some(record => record.meta.isAdmin)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    store.dispatch['user/getLogin']
-    // .then((resp) => {
-    //   console.log(resp)
-      if (store.getters['user/getRole'] != 'admin') {
-        console.log('Role ====>', store.getters['user/getRole'])
-        next({
-          path: '/',
-          query: { redirect: to.fullPath }
-        })
-      } else {
-        console.log('Role ====>', store.state['user/role'])
-        next()
-      }
+  // else if (to.matched.some(record => record.meta.isAdmin)) {
+  //   // this route requires auth, check if logged in
+  //   // if not, redirect to login page.
+  //   store.dispatch['user/getLogin']
+  //   .then((resp) => {
+  //     console.log(resp)
+  //     if (store.state['user/role'] != 'admin') {
+  //       console.log('Role ====>', store.state['user/role'])
+  //       next({
+  //         path: '/',
+  //         query: { redirect: to.fullPath }
+  //       })
+  //     } else {
+  //       console.log('Role ====>', store.state['user/role'])
+  //       next()
+  //     }
 
-    // }).catch((err) => {
-    //   console.log(err)
-    // })
-  } 
-  else {
-    next() // make sure to always call next()!
-  }
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
+  // } 
+  // else {
+  //   next() // make sure to always call next()!
+  // }
 })
 
 export default router
