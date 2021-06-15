@@ -15,11 +15,15 @@
     </div>
     <div class="card shadow">
       <div class="card-header d-flex justify-content-between">
-        <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()">
+        <button type="button" class="btn ml-3 btn-social-icon-text btn-gradient-primary" @click="openModalAdd()" v-if="authData.role == 'admin'">
           Add Data
           <i class="mdi mdi-plus-box"></i>
         </button>
-        <button type="button" class="btn btn-sm mr-3 btn-social-icon-text btn-gradient-success" @click="exportCsv()">
+        <button type="button" 
+          class="btn btn-sm mr-3 btn-social-icon-text btn-gradient-success" @click="exportCsv()"
+          :class="{'disabled': authData.role == 'student'}"
+          >
+          
           Export CSV
           <i class="mdi mdi-plus-box"></i>
         </button>
@@ -166,6 +170,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('user', ['authData']),
     ...mapState('payment', ['payments','dataUpdate']),
     ...mapState('pay', ['transactionToken','getSuccess']),
     getToken() {
@@ -173,6 +178,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('user', ['getAuth']),
     ...mapActions('payment', ['getPayments']),
     ...mapActions('pay', ['doPayment','changeStatus']),
     async doPay(payload) {
@@ -206,9 +212,10 @@ export default {
               that.getPayments()
               console.log('SUCCESS SUBMIT PENDING ====>>',result.status_message)
               console.log('SUCCESS SUBMIT PENDING ====>>',result)
-
+              Swal.fire(`Success`, `Data has been added!`, 'success');
             }).catch((err) => {
               console.log(err)
+              Swal.fire(`Failed`, `Something Went Wrong!!`, 'error');
             })
             
             // $("#payment-form").submit()

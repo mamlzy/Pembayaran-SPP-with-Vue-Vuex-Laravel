@@ -58,13 +58,13 @@
           </router-link>
         <div class="border-bottom"></div>
       </li>
-      <li class="nav-item" v-if="authData.role == 'admin' || authData.role == 'officer'">
+      <li class="nav-item">
         <router-link to="/payments" active-class="text-primary" class="nav-link">
           <span class="menu-title">Payment</span>
             <i class="mdi mdi-cash-usd menu-icon"></i>
           </router-link>
       </li>
-      <li class="nav-item" v-if="authData.role == 'admin' || authData.role == 'officer'">
+      <li class="nav-item">
         <router-link to="/history" active-class="text-primary" class="nav-link">
           <span class="menu-title">Transaction History</span>
             <i class="mdi mdi-history menu-icon"></i>

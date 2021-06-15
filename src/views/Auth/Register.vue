@@ -4,9 +4,9 @@
       <div class="row flex-grow">
         <div class="col-lg-10 mx-auto">
           <div class="auth-form-light text-left shadow-lg p-5">
-            <!-- <div class="brand-logo">
-              <img src="../../assets/images/logo.svg">
-            </div> -->
+            <div class="brand-logo mb-3">
+              <img src="purple/spp.jpg" class="d-block m-auto">
+            </div>
             <div class="ml-3">
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
